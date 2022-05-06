@@ -10,12 +10,39 @@ import Container from "react-bootstrap/Container";
 function MarkingSchemes() {
   const [markingSchemes, setmarkingSchemes] = useState([]);
 
+  const createArray = (res) => {
+    let arr = [];
+    res.map((data) => {
+      let splittedFileName = data.document.split("-");
+      let originalName = "";
+
+      for (let i = 1; i < splittedFileName.length; i++) {
+        originalName += splittedFileName[i];
+        if (i < splittedFileName.length - 1) {
+          originalName += "-";
+        }
+      }
+
+      arr.push({
+        name: data.name,
+        createdBy: data.createdBy,
+        dateCreated: data.dateCreated,
+        visibility: data.visibility,
+        document: {
+          name: originalName,
+          file: data.document,
+        },
+      });
+    });
+    setmarkingSchemes(arr);
+  };
+
   useEffect(() => {
     async function fetchData() {
       await fetch("http://localhost:8070/markingschemes/")
         .then((response) => response.json())
         .then((response) => {
-          setmarkingSchemes(response);
+          createArray(response);
         })
         .catch((err) => {
           console.log(err);
@@ -72,7 +99,9 @@ function MarkingSchemes() {
                       <td>{scheme.createdBy}</td>
                       <td>{scheme.dateCreated}</td>
                       <td>{scheme.visibility}</td>
-                      <td>{scheme.document}</td>
+                      <td>
+                        <a href="#">{scheme.document.name}</a>
+                      </td>
                     </tr>
                   );
                 })}

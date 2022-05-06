@@ -10,12 +10,58 @@ import Container from "react-bootstrap/Container";
 function Templates() {
   const [templates, settemplates] = useState([]);
 
+  const openFile = (document) => {
+    console.log(document);
+
+    fetch("http://localhost:8070/uploads/templates", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(document),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const createArray = (res) => {
+    let arr = [];
+    res.map((data) => {
+      let splittedFileName = data.document.split("-");
+      let originalName = "";
+
+      for (let i = 1; i < splittedFileName.length; i++) {
+        originalName += splittedFileName[i];
+        if (i < splittedFileName.length - 1) {
+          originalName += "-";
+        }
+      }
+
+      arr.push({
+        name: data.name,
+        createdBy: data.createdBy,
+        dateCreated: data.dateCreated,
+        visibility: data.visibility,
+        document: {
+          name: originalName,
+          file: data.document,
+        },
+      });
+    });
+    settemplates(arr);
+  };
+
   useEffect(() => {
     async function fetchData() {
       await fetch("http://localhost:8070/templates/")
         .then((response) => response.json())
         .then((response) => {
-          settemplates(response);
+          createArray(response);
         })
         .catch((err) => {
           console.log(err);
@@ -71,7 +117,11 @@ function Templates() {
                       <td>{template.createdBy}</td>
                       <td>{template.dateCreated}</td>
                       <td>{template.visibility}</td>
-                      <td>{template.document}</td>
+                      <td>
+                        <a href="#" onClick={() => openFile(template.document)}>
+                          {template.document.name}
+                        </a>
+                      </td>
                     </tr>
                   );
                 })}

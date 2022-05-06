@@ -25283,7 +25283,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","./components/shared/BreadCrumb":"5DkyL","./components/views/EditUser":"duMVY","react-bootstrap/Container":"hEdsw","./components/views/UploadTemplate":"jiwCz","./components/views/CreateSubmissionType":"idbJC","./components/views/CreateMarkingScheme":"fZH3V","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./components/views/Home":"dZQ4Y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/views/SubmissionTypes":"1chjI","./components/views/MarkingSchemes":"7b1Hp","./components/views/Templates":"dIY2K","./components/views/Roles":"ke0Xz","./components/shared/Header":"bKWmp"}],"fdOAw":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","./components/shared/BreadCrumb":"5DkyL","./components/views/EditUser":"duMVY","react-bootstrap/Container":"hEdsw","./components/views/UploadTemplate":"jiwCz","./components/views/CreateSubmissionType":"idbJC","./components/views/CreateMarkingScheme":"fZH3V","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./components/views/Home":"dZQ4Y","./components/views/SubmissionTypes":"1chjI","./components/views/MarkingSchemes":"7b1Hp","./components/views/Templates":"dIY2K","./components/views/Roles":"ke0Xz","./components/shared/Header":"bKWmp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fdOAw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MemoryRouter", ()=>_reactRouter.MemoryRouter
@@ -27177,42 +27177,32 @@ $RefreshReg$(_c, "BreadCrumb");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Breadcrumb":"hOow1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"hOow1":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Container":"hEdsw","react-bootstrap/Breadcrumb":"hOow1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hEdsw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
 var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
 var _react = require("react");
 var _themeProvider = require("./ThemeProvider");
-var _breadcrumbItem = require("./BreadcrumbItem");
-var _breadcrumbItemDefault = parcelHelpers.interopDefault(_breadcrumbItem);
 var _jsxRuntime = require("react/jsx-runtime");
 const defaultProps = {
-    label: 'breadcrumb',
-    listProps: {}
+    fluid: false
 };
-const Breadcrumb = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , className , listProps , children , label , // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-as: Component = 'nav' , ...props }, ref)=>{
-    const prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'breadcrumb');
+const Container = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , fluid , // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+as: Component = 'div' , className , ...props }, ref)=>{
+    const prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'container');
+    const suffix = typeof fluid === 'string' ? `-${fluid}` : '-fluid';
     return /*#__PURE__*/ _jsxRuntime.jsx(Component, {
-        "aria-label": label,
-        className: className,
         ref: ref,
         ...props,
-        children: /*#__PURE__*/ _jsxRuntime.jsx("ol", {
-            ...listProps,
-            className: _classnamesDefault.default(prefix, listProps == null ? void 0 : listProps.className),
-            children: children
-        })
+        className: _classnamesDefault.default(className, fluid ? `${prefix}${suffix}` : prefix)
     });
 });
-Breadcrumb.displayName = 'Breadcrumb';
-Breadcrumb.defaultProps = defaultProps;
-exports.default = Object.assign(Breadcrumb, {
-    Item: _breadcrumbItemDefault.default
-});
+Container.displayName = 'Container';
+Container.defaultProps = defaultProps;
+exports.default = Container;
 
-},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","./BreadcrumbItem":"bWkuO","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jocGM":[function(require,module,exports) {
+},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jocGM":[function(require,module,exports) {
 /*!
   Copyright (c) 2018 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -28169,7 +28159,42 @@ module.exports = require('./cjs/react-jsx-runtime.development.js');
     exports.jsxs = jsxs;
 })();
 
-},{"react":"21dqq"}],"bWkuO":[function(require,module,exports) {
+},{"react":"21dqq"}],"hOow1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _themeProvider = require("./ThemeProvider");
+var _breadcrumbItem = require("./BreadcrumbItem");
+var _breadcrumbItemDefault = parcelHelpers.interopDefault(_breadcrumbItem);
+var _jsxRuntime = require("react/jsx-runtime");
+const defaultProps = {
+    label: 'breadcrumb',
+    listProps: {}
+};
+const Breadcrumb = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , className , listProps , children , label , // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+as: Component = 'nav' , ...props }, ref)=>{
+    const prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'breadcrumb');
+    return /*#__PURE__*/ _jsxRuntime.jsx(Component, {
+        "aria-label": label,
+        className: className,
+        ref: ref,
+        ...props,
+        children: /*#__PURE__*/ _jsxRuntime.jsx("ol", {
+            ...listProps,
+            className: _classnamesDefault.default(prefix, listProps == null ? void 0 : listProps.className),
+            children: children
+        })
+    });
+});
+Breadcrumb.displayName = 'Breadcrumb';
+Breadcrumb.defaultProps = defaultProps;
+exports.default = Object.assign(Breadcrumb, {
+    Item: _breadcrumbItemDefault.default
+});
+
+},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","./BreadcrumbItem":"bWkuO","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bWkuO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -28880,32 +28905,7 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"786KC"}],"hEdsw":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _themeProvider = require("./ThemeProvider");
-var _jsxRuntime = require("react/jsx-runtime");
-const defaultProps = {
-    fluid: false
-};
-const Container = /*#__PURE__*/ _react.forwardRef(({ bsPrefix , fluid , // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-as: Component = 'div' , className , ...props }, ref)=>{
-    const prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'container');
-    const suffix = typeof fluid === 'string' ? `-${fluid}` : '-fluid';
-    return /*#__PURE__*/ _jsxRuntime.jsx(Component, {
-        ref: ref,
-        ...props,
-        className: _classnamesDefault.default(className, fluid ? `${prefix}${suffix}` : prefix)
-    });
-});
-Container.displayName = 'Container';
-Container.defaultProps = defaultProps;
-exports.default = Container;
-
-},{"classnames":"jocGM","react":"21dqq","./ThemeProvider":"dVixI","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"duMVY":[function(require,module,exports) {
+},{"react-refresh/runtime":"786KC"}],"duMVY":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0127 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29293,7 +29293,7 @@ $RefreshReg$(_c, "EditUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"iBZ80":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iBZ80":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -31109,7 +31109,7 @@ $RefreshReg$(_c, "UploadTemplate");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"idbJC":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","react":"21dqq","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"idbJC":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$ee57 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -31509,7 +31509,7 @@ $RefreshReg$(_c, "CreateSubmissionType");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"fZH3V":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fZH3V":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$ea00 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32082,7 +32082,7 @@ $RefreshReg$(_c, "CreateMarkingScheme");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","../../components/shared/Criteria":"fGj1y","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"fGj1y":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Form":"iBZ80","react-bootstrap/Button":"aPzUt","react-bootstrap/Image":"cyVPa","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","../../assets/css/styles.module.css":"fEY9J","../../components/shared/Criteria":"fGj1y","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fGj1y":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0796 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32386,7 +32386,7 @@ $RefreshReg$(_c, "Home");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"1chjI":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Container":"hEdsw","react-router-dom":"fdOAw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1chjI":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$ad83 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32678,7 +32678,7 @@ $RefreshReg$(_c, "SubmissionTypes");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Table":"3UQc3","react-bootstrap/InputGroup":"htx7r","react-bootstrap/FormControl":"iynMc","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw"}],"3UQc3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Table":"3UQc3","react-bootstrap/InputGroup":"htx7r","react-bootstrap/FormControl":"iynMc","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3UQc3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
@@ -32802,11 +32802,33 @@ var _s = $RefreshSig$();
 function MarkingSchemes() {
     _s();
     const [markingSchemes, setmarkingSchemes] = _react.useState([]);
+    const createArray = (res)=>{
+        let arr = [];
+        res.map((data)=>{
+            let splittedFileName = data.document.split("-");
+            let originalName = "";
+            for(let i = 1; i < splittedFileName.length; i++){
+                originalName += splittedFileName[i];
+                if (i < splittedFileName.length - 1) originalName += "-";
+            }
+            arr.push({
+                name: data.name,
+                createdBy: data.createdBy,
+                dateCreated: data.dateCreated,
+                visibility: data.visibility,
+                document: {
+                    name: originalName,
+                    file: data.document
+                }
+            });
+        });
+        setmarkingSchemes(arr);
+    };
     _react.useEffect(()=>{
         async function fetchData() {
             await fetch("http://localhost:8070/markingschemes/").then((response)=>response.json()
             ).then((response)=>{
-                setmarkingSchemes(response);
+                createArray(response);
             }).catch((err)=>{
                 console.log(err);
             });
@@ -32818,7 +32840,7 @@ function MarkingSchemes() {
             children: [
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                     fileName: "components/views/MarkingSchemes.jsx",
-                    lineNumber: 31,
+                    lineNumber: 58,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -32827,22 +32849,22 @@ function MarkingSchemes() {
                             children: "Marking Schemes"
                         }, void 0, false, {
                             fileName: "components/views/MarkingSchemes.jsx",
-                            lineNumber: 34,
+                            lineNumber: 61,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "components/views/MarkingSchemes.jsx",
-                        lineNumber: 33,
+                        lineNumber: 60,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "components/views/MarkingSchemes.jsx",
-                    lineNumber: 32,
+                    lineNumber: 59,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                     fileName: "components/views/MarkingSchemes.jsx",
-                    lineNumber: 37,
+                    lineNumber: 64,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -32855,22 +32877,22 @@ function MarkingSchemes() {
                                         placeholder: "Search here"
                                     }, void 0, false, {
                                         fileName: "components/views/MarkingSchemes.jsx",
-                                        lineNumber: 42,
+                                        lineNumber: 69,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "components/views/MarkingSchemes.jsx",
-                                    lineNumber: 41,
+                                    lineNumber: 68,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/MarkingSchemes.jsx",
-                                lineNumber: 40,
+                                lineNumber: 67,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "components/views/MarkingSchemes.jsx",
-                            lineNumber: 39,
+                            lineNumber: 66,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colDefault.default, {
@@ -32884,25 +32906,25 @@ function MarkingSchemes() {
                                         className: "bi bi-plus-lg"
                                     }, void 0, false, {
                                         fileName: "components/views/MarkingSchemes.jsx",
-                                        lineNumber: 48,
+                                        lineNumber: 75,
                                         columnNumber: 15
                                     }, this),
                                     "Create New"
                                 ]
                             }, void 0, true, {
                                 fileName: "components/views/MarkingSchemes.jsx",
-                                lineNumber: 47,
+                                lineNumber: 74,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "components/views/MarkingSchemes.jsx",
-                            lineNumber: 46,
+                            lineNumber: 73,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "components/views/MarkingSchemes.jsx",
-                    lineNumber: 38,
+                    lineNumber: 65,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -32918,53 +32940,53 @@ function MarkingSchemes() {
                                                 children: "#"
                                             }, void 0, false, {
                                                 fileName: "components/views/MarkingSchemes.jsx",
-                                                lineNumber: 58,
+                                                lineNumber: 85,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Name"
                                             }, void 0, false, {
                                                 fileName: "components/views/MarkingSchemes.jsx",
-                                                lineNumber: 59,
+                                                lineNumber: 86,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Created By"
                                             }, void 0, false, {
                                                 fileName: "components/views/MarkingSchemes.jsx",
-                                                lineNumber: 60,
+                                                lineNumber: 87,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Date Created"
                                             }, void 0, false, {
                                                 fileName: "components/views/MarkingSchemes.jsx",
-                                                lineNumber: 61,
+                                                lineNumber: 88,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Visibility"
                                             }, void 0, false, {
                                                 fileName: "components/views/MarkingSchemes.jsx",
-                                                lineNumber: 62,
+                                                lineNumber: 89,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "File"
                                             }, void 0, false, {
                                                 fileName: "components/views/MarkingSchemes.jsx",
-                                                lineNumber: 63,
+                                                lineNumber: 90,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "components/views/MarkingSchemes.jsx",
-                                        lineNumber: 57,
+                                        lineNumber: 84,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "components/views/MarkingSchemes.jsx",
-                                    lineNumber: 56,
+                                    lineNumber: 83,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
@@ -32975,81 +32997,88 @@ function MarkingSchemes() {
                                                     children: markingSchemes.indexOf(scheme) + 1
                                                 }, void 0, false, {
                                                     fileName: "components/views/MarkingSchemes.jsx",
-                                                    lineNumber: 70,
+                                                    lineNumber: 97,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: scheme.name
                                                 }, void 0, false, {
                                                     fileName: "components/views/MarkingSchemes.jsx",
-                                                    lineNumber: 71,
+                                                    lineNumber: 98,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: scheme.createdBy
                                                 }, void 0, false, {
                                                     fileName: "components/views/MarkingSchemes.jsx",
-                                                    lineNumber: 72,
+                                                    lineNumber: 99,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: scheme.dateCreated
                                                 }, void 0, false, {
                                                     fileName: "components/views/MarkingSchemes.jsx",
-                                                    lineNumber: 73,
+                                                    lineNumber: 100,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: scheme.visibility
                                                 }, void 0, false, {
                                                     fileName: "components/views/MarkingSchemes.jsx",
-                                                    lineNumber: 74,
+                                                    lineNumber: 101,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                                    children: scheme.document
+                                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
+                                                        href: "#",
+                                                        children: scheme.document.name
+                                                    }, void 0, false, {
+                                                        fileName: "components/views/MarkingSchemes.jsx",
+                                                        lineNumber: 103,
+                                                        columnNumber: 25
+                                                    }, this)
                                                 }, void 0, false, {
                                                     fileName: "components/views/MarkingSchemes.jsx",
-                                                    lineNumber: 75,
+                                                    lineNumber: 102,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/views/MarkingSchemes.jsx",
-                                            lineNumber: 69,
+                                            lineNumber: 96,
                                             columnNumber: 21
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "components/views/MarkingSchemes.jsx",
-                                    lineNumber: 66,
+                                    lineNumber: 93,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "components/views/MarkingSchemes.jsx",
-                            lineNumber: 55,
+                            lineNumber: 82,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "components/views/MarkingSchemes.jsx",
-                        lineNumber: 54,
+                        lineNumber: 81,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "components/views/MarkingSchemes.jsx",
-                    lineNumber: 53,
+                    lineNumber: 80,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "components/views/MarkingSchemes.jsx",
-            lineNumber: 30,
+            lineNumber: 57,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "components/views/MarkingSchemes.jsx",
-        lineNumber: 29,
+        lineNumber: 56,
         columnNumber: 5
     }, this);
 }
@@ -33064,7 +33093,7 @@ $RefreshReg$(_c, "MarkingSchemes");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Table":"3UQc3","react-bootstrap/InputGroup":"htx7r","react-bootstrap/FormControl":"iynMc","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-bootstrap/Button":"aPzUt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"dIY2K":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Table":"3UQc3","react-bootstrap/InputGroup":"htx7r","react-bootstrap/FormControl":"iynMc","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dIY2K":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f9bd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -33094,11 +33123,48 @@ var _s = $RefreshSig$();
 function Templates() {
     _s();
     const [templates, settemplates] = _react.useState([]);
+    const openFile = (document)=>{
+        console.log(document);
+        fetch("http://localhost:8070/uploads/templates", {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(document)
+        }).then((response)=>response.json()
+        ).then((response)=>{
+            console.log(response);
+        }).catch((err)=>{
+            console.log(err);
+        });
+    };
+    const createArray = (res)=>{
+        let arr = [];
+        res.map((data)=>{
+            let splittedFileName = data.document.split("-");
+            let originalName = "";
+            for(let i = 1; i < splittedFileName.length; i++){
+                originalName += splittedFileName[i];
+                if (i < splittedFileName.length - 1) originalName += "-";
+            }
+            arr.push({
+                name: data.name,
+                createdBy: data.createdBy,
+                dateCreated: data.dateCreated,
+                visibility: data.visibility,
+                document: {
+                    name: originalName,
+                    file: data.document
+                }
+            });
+        });
+        settemplates(arr);
+    };
     _react.useEffect(()=>{
         async function fetchData() {
             await fetch("http://localhost:8070/templates/").then((response)=>response.json()
             ).then((response)=>{
-                settemplates(response);
+                createArray(response);
             }).catch((err)=>{
                 console.log(err);
             });
@@ -33110,7 +33176,7 @@ function Templates() {
             children: [
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                     fileName: "components/views/Templates.jsx",
-                    lineNumber: 30,
+                    lineNumber: 76,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -33119,22 +33185,22 @@ function Templates() {
                             children: "Templates"
                         }, void 0, false, {
                             fileName: "components/views/Templates.jsx",
-                            lineNumber: 33,
+                            lineNumber: 79,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "components/views/Templates.jsx",
-                        lineNumber: 32,
+                        lineNumber: 78,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "components/views/Templates.jsx",
-                    lineNumber: 31,
+                    lineNumber: 77,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                     fileName: "components/views/Templates.jsx",
-                    lineNumber: 36,
+                    lineNumber: 82,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -33147,22 +33213,22 @@ function Templates() {
                                         placeholder: "Search here"
                                     }, void 0, false, {
                                         fileName: "components/views/Templates.jsx",
-                                        lineNumber: 41,
+                                        lineNumber: 87,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "components/views/Templates.jsx",
-                                    lineNumber: 40,
+                                    lineNumber: 86,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Templates.jsx",
-                                lineNumber: 39,
+                                lineNumber: 85,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "components/views/Templates.jsx",
-                            lineNumber: 38,
+                            lineNumber: 84,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colDefault.default, {
@@ -33176,25 +33242,25 @@ function Templates() {
                                         className: "bi bi-plus-lg"
                                     }, void 0, false, {
                                         fileName: "components/views/Templates.jsx",
-                                        lineNumber: 47,
+                                        lineNumber: 93,
                                         columnNumber: 15
                                     }, this),
                                     "Create New"
                                 ]
                             }, void 0, true, {
                                 fileName: "components/views/Templates.jsx",
-                                lineNumber: 46,
+                                lineNumber: 92,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "components/views/Templates.jsx",
-                            lineNumber: 45,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "components/views/Templates.jsx",
-                    lineNumber: 37,
+                    lineNumber: 83,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -33210,53 +33276,53 @@ function Templates() {
                                                 children: "#"
                                             }, void 0, false, {
                                                 fileName: "components/views/Templates.jsx",
-                                                lineNumber: 57,
+                                                lineNumber: 103,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Name"
                                             }, void 0, false, {
                                                 fileName: "components/views/Templates.jsx",
-                                                lineNumber: 58,
+                                                lineNumber: 104,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Created By"
                                             }, void 0, false, {
                                                 fileName: "components/views/Templates.jsx",
-                                                lineNumber: 59,
+                                                lineNumber: 105,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Date Created"
                                             }, void 0, false, {
                                                 fileName: "components/views/Templates.jsx",
-                                                lineNumber: 60,
+                                                lineNumber: 106,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "Visibility"
                                             }, void 0, false, {
                                                 fileName: "components/views/Templates.jsx",
-                                                lineNumber: 61,
+                                                lineNumber: 107,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                                 children: "File"
                                             }, void 0, false, {
                                                 fileName: "components/views/Templates.jsx",
-                                                lineNumber: 62,
+                                                lineNumber: 108,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "components/views/Templates.jsx",
-                                        lineNumber: 56,
+                                        lineNumber: 102,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "components/views/Templates.jsx",
-                                    lineNumber: 55,
+                                    lineNumber: 101,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
@@ -33267,81 +33333,90 @@ function Templates() {
                                                     children: templates.indexOf(template) + 1
                                                 }, void 0, false, {
                                                     fileName: "components/views/Templates.jsx",
-                                                    lineNumber: 69,
+                                                    lineNumber: 115,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: template.name
                                                 }, void 0, false, {
                                                     fileName: "components/views/Templates.jsx",
-                                                    lineNumber: 70,
+                                                    lineNumber: 116,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: template.createdBy
                                                 }, void 0, false, {
                                                     fileName: "components/views/Templates.jsx",
-                                                    lineNumber: 71,
+                                                    lineNumber: 117,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: template.dateCreated
                                                 }, void 0, false, {
                                                     fileName: "components/views/Templates.jsx",
-                                                    lineNumber: 72,
+                                                    lineNumber: 118,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                                     children: template.visibility
                                                 }, void 0, false, {
                                                     fileName: "components/views/Templates.jsx",
-                                                    lineNumber: 73,
+                                                    lineNumber: 119,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                                    children: template.document
+                                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("a", {
+                                                        href: "#",
+                                                        onClick: ()=>openFile(template.document)
+                                                        ,
+                                                        children: template.document.name
+                                                    }, void 0, false, {
+                                                        fileName: "components/views/Templates.jsx",
+                                                        lineNumber: 121,
+                                                        columnNumber: 25
+                                                    }, this)
                                                 }, void 0, false, {
                                                     fileName: "components/views/Templates.jsx",
-                                                    lineNumber: 74,
+                                                    lineNumber: 120,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "components/views/Templates.jsx",
-                                            lineNumber: 68,
+                                            lineNumber: 114,
                                             columnNumber: 21
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "components/views/Templates.jsx",
-                                    lineNumber: 65,
+                                    lineNumber: 111,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "components/views/Templates.jsx",
-                            lineNumber: 54,
+                            lineNumber: 100,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "components/views/Templates.jsx",
-                        lineNumber: 53,
+                        lineNumber: 99,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "components/views/Templates.jsx",
-                    lineNumber: 52,
+                    lineNumber: 98,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "components/views/Templates.jsx",
-            lineNumber: 29,
+            lineNumber: 75,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "components/views/Templates.jsx",
-        lineNumber: 28,
+        lineNumber: 74,
         columnNumber: 5
     }, this);
 }
@@ -33356,7 +33431,7 @@ $RefreshReg$(_c, "Templates");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Table":"3UQc3","react-bootstrap/InputGroup":"htx7r","react-bootstrap/FormControl":"iynMc","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw"}],"ke0Xz":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Table":"3UQc3","react-bootstrap/InputGroup":"htx7r","react-bootstrap/FormControl":"iynMc","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"ke0Xz":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$d021 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -33395,7 +33470,7 @@ $RefreshReg$(_c, "Roles");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Container":"hEdsw"}],"bKWmp":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bKWmp":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$d18d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -33504,7 +33579,7 @@ $RefreshReg$(_c, "Header");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Navbar":"1mHjo","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Nav":"cXyL2","react-router-dom":"fdOAw"}],"1mHjo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Navbar":"1mHjo","react-bootstrap/Nav":"cXyL2","react-bootstrap/Container":"hEdsw","react-router-dom":"fdOAw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1mHjo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _classnames = require("classnames");
