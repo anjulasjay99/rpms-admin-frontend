@@ -13,6 +13,7 @@ import SubmissionTypes from "./components/views/SubmissionTypes";
 import MarkingSchemes from "./components/views/MarkingSchemes";
 import Templates from "./components/views/Templates";
 import Roles from "./components/views/Roles";
+import Header from "./components/shared/Header";
 function App() {
   const [user, setuser] = useState({
     username: "admin123",
@@ -29,45 +30,38 @@ function App() {
 
   return (
     <div>
-      <Container>
-        <Row>
-          <Col>
-            <BreadCrumb></BreadCrumb>
-          </Col>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Col xs>
-            <BrowserRouter>
-              <Routes>
-                <Route exact path="/" element={<Home user={user} />} />
-                <Route
-                  path="/create-marking-scheme"
-                  element={<CreateMarkingScheme user={user} />}
-                />
-                <Route
-                  path="/create-submission-type"
-                  element={<CreateSubmissionType user={user} />}
-                />
-                <Route
-                  path="/upload-template"
-                  element={<UploadTemplate user={user} />}
-                />
-                <Route path="/edit-user" element={<EditUser user={user} />} />
-                <Route
-                  path="/submission-types"
-                  element={<SubmissionTypes user={user} />}
-                />
-                <Route
-                  path="/marking-schemes"
-                  element={<MarkingSchemes user={user} />}
-                />
-                <Route path="/templates" element={<Templates user={user} />} />
-                <Route path="/roles" element={<Roles user={user} />} />
-              </Routes>
-            </BrowserRouter>
-          </Col>
-        </Row>
-      </Container>
+      <BrowserRouter>
+        <Header></Header>
+        <br />
+        <BreadCrumb></BreadCrumb>
+
+        <Routes>
+          <Route exact path="/" element={<Home user={user} />} />
+          <Route
+            path="/create-marking-scheme"
+            element={<CreateMarkingScheme user={user} />}
+          />
+          <Route
+            path="/create-submission-type"
+            element={<CreateSubmissionType user={user} />}
+          />
+          <Route
+            path="/upload-template"
+            element={<UploadTemplate user={user} />}
+          />
+          <Route path="/edit-user" element={<EditUser user={user} />} />
+          <Route
+            path="/submission-types"
+            element={<SubmissionTypes user={user} />}
+          />
+          <Route
+            path="/marking-schemes"
+            element={<MarkingSchemes user={user} />}
+          />
+          <Route path="/templates" element={<Templates user={user} />} />
+          <Route path="/roles" element={<Roles user={user} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
