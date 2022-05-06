@@ -7,15 +7,25 @@ import Col from "react-bootstrap/Col";
 import styles from "../../assets/css/styles.module.css";
 import Criteria from "../../components/shared/Criteria";
 
-function CreateMarkingScheme() {
+function CreateMarkingScheme({ user }) {
   const [criterias, setcriterias] = useState([
     {
       id: new Date().toISOString(),
-      criteria: "",
-      mark: 0,
+      criteria: "NEW",
+      mark: 10,
     },
   ]);
+  const [name, setname] = useState("");
+  const [description, setdescription] = useState("");
+  const [visibility, setvisibility] = useState("Public");
+  const [file, setfile] = useState();
 
+  //triggers when user selects a file
+  const onFileSelect = (event) => {
+    setfile(event.target.files[0]);
+  };
+
+  //called to add a new criteria
   const addNewCriteria = () => {
     setcriterias([
       ...criterias,
@@ -23,9 +33,58 @@ function CreateMarkingScheme() {
     ]);
   };
 
+  //called to remove a criteria
   const removeCriteria = (id) => {
     let cts = criterias.filter((c) => c.id !== id);
     setcriterias(cts);
+  };
+
+  //called when user submit the form
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = new FormData();
+    data.append("markingscheme", file);
+
+    let document = "";
+
+    await fetch(`http://localhost:8070/uploads/markingschemes/`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        document = response;
+      })
+      .catch((err) => {
+        alert("Error!");
+      });
+
+    const markingScheme = {
+      name,
+      description,
+      criterias,
+      visibility,
+      document,
+    };
+
+    fetch(`http://localhost:8070/markingschemes/${user.username}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(markingScheme),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        alert("Added successfully!");
+      })
+      .catch((err) => {
+        alert("Error!");
+      });
   };
 
   const onCriteriaValueChange = (id, event) => {};
@@ -44,29 +103,47 @@ function CreateMarkingScheme() {
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Name" />
+              <Form.Control
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+              />
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Form.Group className="mb-3">
             <Form.Label>Description (Optional)</Form.Label>
-            <Form.Control as="textarea" rows={3} />
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={description}
+              onChange={(e) => setdescription(e.target.value)}
+            />
           </Form.Group>
         </Row>
         <Row>
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Upload Marking Scheme</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control
+                type="file"
+                accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                text/plain, application/pdf"
+                onChange={(event) => onFileSelect(event)}
+              />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group className="mb-3">
               <Form.Label>Visibility</Form.Label>
-              <Form.Select>
-                <option value="admin">Public</option>
-                <option value="staff">Hidden</option>
+              <Form.Select
+                value={visibility}
+                onChange={(e) => setvisibility(e.target.value)}
+              >
+                <option value="Public">Public</option>
+                <option value="Hidden">Hidden</option>
               </Form.Select>
             </Form.Group>
           </Col>
@@ -153,8 +230,13 @@ function CreateMarkingScheme() {
         </Row>
         <Row className="align-items-end">
           <Col lg={12}>
-            <Button variant="primary" type="submit" style={{ float: "right" }}>
-              Save Changes
+            <Button
+              variant="primary"
+              type="submit"
+              style={{ float: "right" }}
+              onClick={(event) => onSubmit(event)}
+            >
+              Save
             </Button>
             <Button
               variant="secondary"
