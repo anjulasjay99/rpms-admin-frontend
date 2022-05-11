@@ -5,7 +5,7 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 function BreadCrumb() {
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       <Container>
         <Breadcrumb>
           <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
