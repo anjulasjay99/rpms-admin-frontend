@@ -32253,7 +32253,10 @@ var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _fa = require("react-icons/fa");
+var _s = $RefreshSig$();
 function Home() {
+    _s();
+    const navigate = _reactRouterDom.useNavigate();
     const card = {
         height: "300px",
         width: "300px",
@@ -32274,12 +32277,12 @@ function Home() {
                         children: "Home"
                     }, void 0, false, {
                         fileName: "components/views/Home.jsx",
-                        lineNumber: 32,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                         fileName: "components/views/Home.jsx",
-                        lineNumber: 33,
+                        lineNumber: 34,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -32288,6 +32291,8 @@ function Home() {
                                 lg: 3,
                                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                                     style: card,
+                                    onClick: ()=>navigate("/submission-types")
+                                    ,
                                     children: [
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fa.FaFileUpload, {
                                             style: {
@@ -32295,7 +32300,7 @@ function Home() {
                                             }
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 50,
+                                            lineNumber: 51,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
@@ -32305,24 +32310,26 @@ function Home() {
                                             children: "Submission Types"
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 52,
+                                            lineNumber: 53,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/views/Home.jsx",
-                                    lineNumber: 49,
+                                    lineNumber: 50,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Home.jsx",
-                                lineNumber: 48,
+                                lineNumber: 49,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colDefault.default, {
                                 lg: 3,
                                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                                     style: card,
+                                    onClick: ()=>navigate("/templates")
+                                    ,
                                     children: [
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fa.FaFileAlt, {
                                             style: {
@@ -32330,7 +32337,7 @@ function Home() {
                                             }
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 57,
+                                            lineNumber: 58,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
@@ -32340,24 +32347,26 @@ function Home() {
                                             children: "Templates"
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 59,
+                                            lineNumber: 60,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/views/Home.jsx",
-                                    lineNumber: 56,
+                                    lineNumber: 57,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Home.jsx",
-                                lineNumber: 55,
+                                lineNumber: 56,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colDefault.default, {
                                 lg: 3,
                                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                                     style: card,
+                                    onClick: ()=>navigate("/marking-schemes")
+                                    ,
                                     children: [
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fa.FaFileSignature, {
                                             style: {
@@ -32365,7 +32374,7 @@ function Home() {
                                             }
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 64,
+                                            lineNumber: 65,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
@@ -32375,24 +32384,26 @@ function Home() {
                                             children: "Marking Schemes"
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 66,
+                                            lineNumber: 67,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/views/Home.jsx",
-                                    lineNumber: 63,
+                                    lineNumber: 64,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Home.jsx",
-                                lineNumber: 62,
+                                lineNumber: 63,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colDefault.default, {
                                 lg: 3,
                                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                                     style: card,
+                                    onClick: ()=>navigate("/submission-types")
+                                    ,
                                     children: [
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fa.FaUserCheck, {
                                             style: {
@@ -32400,7 +32411,7 @@ function Home() {
                                             }
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 71,
+                                            lineNumber: 72,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
@@ -32410,29 +32421,29 @@ function Home() {
                                             children: "Assign Panels"
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 73,
+                                            lineNumber: 74,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/views/Home.jsx",
-                                    lineNumber: 70,
+                                    lineNumber: 71,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Home.jsx",
-                                lineNumber: 69,
+                                lineNumber: 70,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/views/Home.jsx",
-                        lineNumber: 47,
+                        lineNumber: 48,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                         fileName: "components/views/Home.jsx",
-                        lineNumber: 77,
+                        lineNumber: 78,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_rowDefault.default, {
@@ -32442,6 +32453,8 @@ function Home() {
                                 lg: 3,
                                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                                     style: card,
+                                    onClick: ()=>navigate("/edit-user")
+                                    ,
                                     children: [
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fa.FaUserAlt, {
                                             style: {
@@ -32449,7 +32462,7 @@ function Home() {
                                             }
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 81,
+                                            lineNumber: 82,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
@@ -32459,24 +32472,26 @@ function Home() {
                                             children: "Users"
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 83,
+                                            lineNumber: 84,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/views/Home.jsx",
-                                    lineNumber: 80,
+                                    lineNumber: 81,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Home.jsx",
-                                lineNumber: 79,
+                                lineNumber: 80,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colDefault.default, {
                                 lg: 3,
                                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                                     style: card,
+                                    onClick: ()=>navigate("/roles")
+                                    ,
                                     children: [
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fa.FaUsers, {
                                             style: {
@@ -32484,7 +32499,7 @@ function Home() {
                                             }
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 88,
+                                            lineNumber: 89,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
@@ -32494,44 +32509,49 @@ function Home() {
                                             children: "Roles"
                                         }, void 0, false, {
                                             fileName: "components/views/Home.jsx",
-                                            lineNumber: 90,
+                                            lineNumber: 91,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "components/views/Home.jsx",
-                                    lineNumber: 87,
+                                    lineNumber: 88,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "components/views/Home.jsx",
-                                lineNumber: 86,
+                                lineNumber: 87,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "components/views/Home.jsx",
-                        lineNumber: 78,
+                        lineNumber: 79,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "components/views/Home.jsx",
-                lineNumber: 31,
+                lineNumber: 32,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
                 fileName: "components/views/Home.jsx",
-                lineNumber: 95,
+                lineNumber: 96,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "components/views/Home.jsx",
-        lineNumber: 30,
+        lineNumber: 31,
         columnNumber: 5
     }, this);
 }
+_s(Home, "CzcTeTziyjMsSrAVmHuCCb6+Bfg=", false, function() {
+    return [
+        _reactRouterDom.useNavigate
+    ];
+});
 _c = Home;
 exports.default = Home;
 var _c;

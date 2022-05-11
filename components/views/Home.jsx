@@ -1,13 +1,38 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as styles from "../../assets/css/styles.module.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {
+  FaFileAlt,
+  FaFileSignature,
+  FaFileUpload,
+  FaUserCheck,
+  FaUsers,
+  FaUserAlt,
+} from "react-icons/fa";
 
 function Home() {
+  const navigate = useNavigate();
+  const card = {
+    height: "300px",
+    width: "300px",
+    background: "whitesmoke",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  };
   return (
     <div>
       <Container>
         <h2>Home</h2>
-        <Link to="/create-marking-scheme">Create Marking Scheme</Link> <br />
+        <br />
+        {/* <Link to="/create-marking-scheme">Create Marking Scheme</Link> <br />
         <Link to="/create-submission-type">Create Submission Type</Link> <br />
         <Link to="/upload-template">Upload Template</Link>
         <br />
@@ -19,8 +44,56 @@ function Home() {
         <Link to="/templates">Templates</Link>
         <br />
         <Link to="/roles">Roles</Link>
+        <br /> */}
+        <Row>
+          <Col lg={3}>
+            <div style={card} onClick={() => navigate("/submission-types")}>
+              <FaFileUpload style={{ fontSize: "56px" }} />
+
+              <label style={{ fontSize: "24px" }}>Submission Types</label>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div style={card} onClick={() => navigate("/templates")}>
+              <FaFileAlt style={{ fontSize: "56px" }} />
+
+              <label style={{ fontSize: "24px" }}>Templates</label>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div style={card} onClick={() => navigate("/marking-schemes")}>
+              <FaFileSignature style={{ fontSize: "56px" }} />
+
+              <label style={{ fontSize: "24px" }}>Marking Schemes</label>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div style={card} onClick={() => navigate("/submission-types")}>
+              <FaUserCheck style={{ fontSize: "56px" }} />
+
+              <label style={{ fontSize: "24px" }}>Assign Panels</label>
+            </div>
+          </Col>
+        </Row>
         <br />
+        <Row className="justify-content-md-center">
+          <Col lg={3}>
+            <div style={card} onClick={() => navigate("/edit-user")}>
+              <FaUserAlt style={{ fontSize: "56px" }} />
+
+              <label style={{ fontSize: "24px" }}>Users</label>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div style={card} onClick={() => navigate("/roles")}>
+              <FaUsers style={{ fontSize: "56px" }} />
+
+              <label style={{ fontSize: "24px" }}>Roles</label>
+            </div>
+          </Col>
+        </Row>
       </Container>
+      <br />
     </div>
   );
 }
