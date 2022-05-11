@@ -14,6 +14,8 @@ import MarkingSchemes from "./components/views/MarkingSchemes";
 import Templates from "./components/views/Templates";
 import Roles from "./components/views/Roles";
 import Header from "./components/shared/Header";
+import AssignPanels from "./components/views/AssignPanels";
+
 function App() {
   const [user, setuser] = useState({
     username: "admin123",
@@ -60,6 +62,7 @@ function App() {
           />
           <Route path="/templates" element={<Templates user={user} />} />
           <Route path="/roles" element={<Roles user={user} />} />
+          <Route path="/assign-panels" element={<AssignPanels user={user} />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -68,7 +68,7 @@ function Home() {
             </div>
           </Col>
           <Col lg={3}>
-            <div style={card} onClick={() => navigate("/submission-types")}>
+            <div style={card} onClick={() => navigate("/assign-panels")}>
               <FaUserCheck style={{ fontSize: "56px" }} />
 
               <label style={{ fontSize: "24px" }}>Assign Panels</label>
