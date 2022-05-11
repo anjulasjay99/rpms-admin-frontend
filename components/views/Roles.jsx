@@ -1,7 +1,12 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
 
 function Roles() {
-  return <div>Roles</div>;
+  return (
+    <div>
+      <Container>Roles</Container>
+    </div>
+  );
 }
 
 export default Roles;
