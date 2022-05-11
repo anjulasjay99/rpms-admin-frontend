@@ -6,8 +6,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function MarkingSchemes() {
+  const navigate = useNavigate();
   const [markingSchemes, setmarkingSchemes] = useState([]);
 
   const openFile = (doc) => {
@@ -88,8 +91,13 @@ function MarkingSchemes() {
             </div>
           </Col>
           <Col>
-            <Button variant="primary" style={{ float: "right" }}>
+            <Button
+              variant="primary"
+              style={{ float: "right" }}
+              onClick={() => navigate("/create-marking-scheme")}
+            >
               <i className="bi bi-plus-lg"></i>
+              <FaPlus />
               Create New
             </Button>
           </Col>
