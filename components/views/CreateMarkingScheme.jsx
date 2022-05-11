@@ -11,9 +11,8 @@ import Container from "react-bootstrap/Container";
 function CreateMarkingScheme({ user }) {
   const [criterias, setcriterias] = useState([
     {
-      id: new Date().toISOString(),
-      criteria: "NEW",
-      mark: 10,
+      criteria: "",
+      mark: 0,
     },
   ]);
   const [name, setname] = useState("");
@@ -28,10 +27,7 @@ function CreateMarkingScheme({ user }) {
 
   //called to add a new criteria
   const addNewCriteria = () => {
-    setcriterias([
-      ...criterias,
-      { id: new Date().toISOString(), criteria: "", mark: 0 },
-    ]);
+    setcriterias([...criterias, { criteria: "", mark: 0 }]);
   };
 
   //called to remove a criteria
@@ -88,7 +84,22 @@ function CreateMarkingScheme({ user }) {
       });
   };
 
-  const onCriteriaValueChange = (id, event) => {};
+  const onCriteriaValueChange = (index, event) => {
+    let newArr = [...criterias];
+    newArr[index] = { criteria: event.target.value, mark: newArr[index].mark };
+
+    setcriterias(newArr);
+  };
+
+  const onCriteriaMarkChange = (index, event) => {
+    let newArr = [...criterias];
+    newArr[index] = {
+      criteria: newArr[index].criteria,
+      mark: event.target.value,
+    };
+
+    setcriterias(newArr);
+  };
   return (
     <div>
       <Container>
@@ -177,7 +188,7 @@ function CreateMarkingScheme({ user }) {
                     padding: "5px",
                   }}
                 >
-                  {criterias.map((criteria) => {
+                  {criterias.map((criteria, index) => {
                     return (
                       <div
                         style={{
@@ -195,6 +206,9 @@ function CreateMarkingScheme({ user }) {
                                 type="text"
                                 placeholder="Criteria"
                                 value={criteria.criteria}
+                                onChange={(e) => {
+                                  onCriteriaValueChange(index, e);
+                                }}
                               />
                             </Form.Group>
                           </Col>
@@ -208,6 +222,9 @@ function CreateMarkingScheme({ user }) {
                                     type="number"
                                     placeholder="0"
                                     value={criteria.mark}
+                                    onChange={(e) => {
+                                      onCriteriaMarkChange(index, e);
+                                    }}
                                   />
                                 </Col>
                                 <Col lg={2}>
@@ -249,6 +266,7 @@ function CreateMarkingScheme({ user }) {
             </Col>
           </Row>
         </Form>
+        <br />
       </Container>
     </div>
   );
