@@ -10,6 +10,22 @@ import Container from "react-bootstrap/Container";
 function MarkingSchemes() {
   const [markingSchemes, setmarkingSchemes] = useState([]);
 
+  const openFile = (doc) => {
+    fetch(`http://localhost:8070/uploads/markingschemes/${doc.id}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", doc.name);
+        link.setAttribute("target", "_blank");
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const createArray = (res) => {
     let arr = [];
     res.map((data) => {
@@ -29,6 +45,7 @@ function MarkingSchemes() {
         dateCreated: data.dateCreated,
         visibility: data.visibility,
         document: {
+          id: splittedFileName[0],
           name: originalName,
           file: data.document,
         },
@@ -100,7 +117,9 @@ function MarkingSchemes() {
                       <td>{scheme.dateCreated}</td>
                       <td>{scheme.visibility}</td>
                       <td>
-                        <a href="#">{scheme.document.name}</a>
+                        <a href="#" onClick={() => openFile(scheme.document)}>
+                          {scheme.document.name}
+                        </a>
                       </td>
                     </tr>
                   );

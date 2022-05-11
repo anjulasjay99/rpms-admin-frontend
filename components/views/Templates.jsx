@@ -6,23 +6,21 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { FaPlus } from "react-icons/fa";
 
 function Templates() {
   const [templates, settemplates] = useState([]);
 
-  const openFile = (document) => {
-    console.log(document);
-
-    fetch("http://localhost:8070/uploads/templates", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(document),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
+  const openFile = (doc) => {
+    fetch(`http://localhost:8070/uploads/templates/${doc.id}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", doc.name);
+        link.setAttribute("target", "_blank");
+        document.body.appendChild(link);
+        link.click();
       })
       .catch((err) => {
         console.log(err);
@@ -48,6 +46,7 @@ function Templates() {
         dateCreated: data.dateCreated,
         visibility: data.visibility,
         document: {
+          id: splittedFileName[0],
           name: originalName,
           file: data.document,
         },
@@ -90,11 +89,11 @@ function Templates() {
           </Col>
           <Col>
             <Button variant="primary" style={{ float: "right" }}>
-              <i className="bi bi-plus-lg"></i>
-              Create New
+              <FaPlus /> Create New
             </Button>
           </Col>
         </Row>
+        <br />
         <Row>
           <Col>
             <Table striped responsive>
