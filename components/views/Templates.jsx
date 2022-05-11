@@ -7,8 +7,10 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Templates() {
+  const navigate = useNavigate();
   const [templates, settemplates] = useState([]);
 
   const openFile = (doc) => {
@@ -88,7 +90,11 @@ function Templates() {
             </div>
           </Col>
           <Col>
-            <Button variant="primary" style={{ float: "right" }}>
+            <Button
+              variant="primary"
+              style={{ float: "right" }}
+              onClick={() => navigate("/upload-template")}
+            >
               <FaPlus /> Create New
             </Button>
           </Col>

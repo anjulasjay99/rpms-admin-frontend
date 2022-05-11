@@ -6,8 +6,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function SubmissionTypes() {
+  const navigate = useNavigate();
   const [submissionTypes, setsubmissionTypes] = useState([]);
 
   useEffect(() => {
@@ -44,8 +47,13 @@ function SubmissionTypes() {
             </div>
           </Col>
           <Col>
-            <Button variant="primary" style={{ float: "right" }}>
+            <Button
+              variant="primary"
+              style={{ float: "right" }}
+              onClick={() => navigate("/create-submission-type")}
+            >
               <i className="bi bi-plus-lg"></i>
+              <FaPlus />
               Create New
             </Button>
           </Col>
