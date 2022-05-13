@@ -25,7 +25,7 @@ function UploadTemplate({ user }) {
 
     let document = "";
 
-    await fetch(`http://localhost:8070/files/templates/upload/`, {
+    await fetch(`http://localhost:8070/templates/files/upload/`, {
       method: "POST",
       headers: {
         Accept: "application/json",

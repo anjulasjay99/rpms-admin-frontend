@@ -14,7 +14,7 @@ function MarkingSchemes() {
   const [markingSchemes, setmarkingSchemes] = useState([]);
 
   const openFile = (doc) => {
-    fetch(`http://localhost:8070/files/markingschemes/download/${doc.id}`)
+    fetch(`http://localhost:8070/markingschemes/files/download/${doc.id}`)
       .then((response) => response.blob())
       .then((blob) => {
         const link = document.createElement("a");
