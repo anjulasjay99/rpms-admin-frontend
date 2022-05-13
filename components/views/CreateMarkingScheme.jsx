@@ -31,8 +31,8 @@ function CreateMarkingScheme({ user }) {
   };
 
   //called to remove a criteria
-  const removeCriteria = (id) => {
-    let cts = criterias.filter((c) => c.id !== id);
+  const removeCriteria = (index) => {
+    let cts = criterias.filter((c) => criterias.indexOf(c) !== index);
     setcriterias(cts);
   };
 
@@ -231,7 +231,7 @@ function CreateMarkingScheme({ user }) {
                                   {" "}
                                   <Button
                                     variant="danger"
-                                    onClick={() => removeCriteria(criteria.id)}
+                                    onClick={() => removeCriteria(index)}
                                   >
                                     Remove
                                   </Button>
