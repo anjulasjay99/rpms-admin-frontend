@@ -58,6 +58,7 @@ function Templates() {
   };
 
   useEffect(() => {
+    //fetch uploaded templates
     async function fetchData() {
       await fetch("http://localhost:8070/templates/")
         .then((response) => response.json())

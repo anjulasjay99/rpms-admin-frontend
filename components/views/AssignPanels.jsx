@@ -10,20 +10,29 @@ import Modal from "react-bootstrap/Modal";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+//styles
+const panelRowStyle = {
+  width: "100%",
+  margin: "5px 0px 5px 0px",
+  padding: "5px",
+  border: "1px solid #ccc",
+  borderRadius: "5px",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+};
+
+const modalContentDiv = {
+  marginTop: "10px",
+  maxHeight: "400px",
+  overflowY: "auto",
+  overflowX: "hidden",
+};
+
 function AssignPanels() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const [studentGroups, setstudentGroups] = useState([
-    {
-      groupID: "GRP_30",
-      Leadermail: "rasika.p@my.sliit.lk",
-      S2mail: "malisha.p@my.sliit.lk",
-      S3mail: "pavithra.c@my.sliit.lk",
-      S4mail: "zaid.m@my.sliit.lk",
-      topic: "Machine Learning",
-      panel: "",
-    },
-  ]);
+  const [studentGroups, setstudentGroups] = useState([]);
   const [panels, setpanels] = useState([
     {
       name: "Dharshana Rajarathna",
@@ -38,47 +47,120 @@ function AssignPanels() {
       email: "nayana.w@sliit.lk",
     },
   ]);
+  const [assignedPanels, setassignedPanels] = useState([]);
+  const [topics, settopics] = useState([]);
   const [panelToAssign, setpanelToAssign] = useState("dharshana.r@sliit.lk");
+  const [selectedGroup, setselectedGroup] = useState("");
 
-  const panelRowStyle = {
-    width: "100%",
-    margin: "5px 0px 5px 0px",
-    padding: "5px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  };
-
-  const modalContentDiv = {
-    marginTop: "10px",
-    maxHeight: "400px",
-    overflowY: "auto",
-    overflowX: "hidden",
-  };
-
+  //close modal
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
+  //open modal
+  const handleShow = (groupID) => {
+    setselectedGroup(groupID);
+    setShow(true);
+  };
+
+  //fetch all registered groups
+  const fetchGroups = async () => {
+    await fetch("http://localhost:8070/groups/")
+      .then((response) => response.json())
+      .then((response) => {
+        setstudentGroups(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //fetch registered topics
+  const fetchTopics = async () => {
+    await fetch("http://localhost:8070/topicsubs/")
+      .then((response) => response.json())
+      .then((response) => {
+        settopics(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //fetch all staff members
+  const fetchStaffMembers = async () => {
+    await fetch("http://localhost:8070/staff/")
+      .then((response) => response.json())
+      .then((response) => {
+        setpanels(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //fetch all assigned panels
+  const fetchAssignedPanels = async () => {
+    await fetch("http://localhost:8070/assignedpanels/")
+      .then((response) => response.json())
+      .then((response) => {
+        setassignedPanels(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //get the panel assigned for a group
+  const getAssignedPanel = (groupId) => {
+    let panel = "Unassigned";
+    for (let i = 0; i < assignedPanels.length; i++) {
+      if (groupId === assignedPanels[i].groupId) {
+        panel = assignedPanels[i].panel;
+        break;
+      }
+    }
+
+    return panel;
+  };
+
+  //get the topic selected by a group
+  const getTopic = (groupId) => {
+    let topic = "No Topic";
+    for (let i = 0; i < topics.length; i++) {
+      if (groupId === topics[i].groupId) {
+        topic = topics[i].topic;
+        break;
+      }
+    }
+
+    return topic;
+  };
+
+  //assign a panel to a selected student group
   const assignPanel = () => {
-    console.log(panelToAssign);
-    setShow(false);
+    const data = {
+      groupId: selectedGroup,
+      panel: panelToAssign,
+    };
+    fetch("http://localhost:8070/assignedpanels", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(() => {
+        alert("Success!");
+        setShow(false);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   useEffect(() => {
-    /* async function fetchData() {
-      await fetch("http://localhost:8070/submissiontypes/")
-        .then((response) => response.json())
-        .then((response) => {
-          setsubmissionTypes(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    fetchData(); */
+    fetchAssignedPanels();
+    fetchGroups();
+    fetchTopics();
   }, []);
 
   return (
@@ -188,10 +270,13 @@ function AssignPanels() {
                         <br />
                         {group.S4mail}
                       </td>
-                      <td>{group.topic}</td>
-                      <td>{group.panel === "" ? "Unassigned" : group.panel}</td>
+                      <td>{getTopic(group.groupID)}</td>
+                      <td>{getAssignedPanel(group.groupID)}</td>
                       <td>
-                        <Button variant="outline-primary" onClick={handleShow}>
+                        <Button
+                          variant="outline-primary"
+                          onClick={() => handleShow(group.groupID)}
+                        >
                           Assign Panel
                         </Button>
                       </td>
