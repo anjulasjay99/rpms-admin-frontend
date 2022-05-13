@@ -47,7 +47,11 @@ function Home() {
         <br /> */}
         <Row>
           <Col lg={3}>
-            <div style={card} onClick={() => navigate("/submission-types")}>
+            <div
+              style={card}
+              onClick={() => navigate("/submission-types")}
+              className={styles.homeCard}
+            >
               <FaFileUpload style={{ fontSize: "56px" }} />
 
               <label style={{ fontSize: "24px" }}>Submission Types</label>
