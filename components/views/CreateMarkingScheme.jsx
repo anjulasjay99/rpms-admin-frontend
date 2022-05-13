@@ -45,7 +45,7 @@ function CreateMarkingScheme({ user }) {
 
     let document = "";
 
-    await fetch(`http://localhost:8070/uploads/markingschemes/`, {
+    await fetch(`http://localhost:8070/files/markingschemes/upload/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
