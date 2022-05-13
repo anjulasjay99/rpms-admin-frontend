@@ -14,7 +14,7 @@ function Templates() {
   const [templates, settemplates] = useState([]);
 
   const openFile = (doc) => {
-    fetch(`http://localhost:8070/files/templates/download/${doc.id}`)
+    fetch(`http://localhost:8070/templates/files/download/${doc.id}`)
       .then((response) => response.blob())
       .then((blob) => {
         const link = document.createElement("a");
