@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -7,8 +7,10 @@ import Col from "react-bootstrap/Col";
 import styles from "../../assets/css/styles.module.css";
 import Criteria from "../../components/shared/Criteria";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
 
 function CreateMarkingScheme({ user }) {
+  const navigate = useNavigate();
   const [criterias, setcriterias] = useState([
     {
       criteria: "",
@@ -48,6 +50,7 @@ function CreateMarkingScheme({ user }) {
     await fetch(`http://localhost:8070/markingschemes/files/upload/`, {
       method: "POST",
       headers: {
+        "x-access-token": sessionStorage.getItem("token"),
         Accept: "application/json",
       },
       body: data,
@@ -71,6 +74,7 @@ function CreateMarkingScheme({ user }) {
     fetch(`http://localhost:8070/markingschemes/${user.username}`, {
       method: "POST",
       headers: {
+        "x-access-token": sessionStorage.getItem("token"),
         "Content-type": "application/json",
       },
       body: JSON.stringify(markingScheme),
@@ -100,6 +104,14 @@ function CreateMarkingScheme({ user }) {
 
     setcriterias(newArr);
   };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div>
       <Container>

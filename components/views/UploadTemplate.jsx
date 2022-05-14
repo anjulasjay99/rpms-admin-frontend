@@ -4,10 +4,12 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "../../assets/css/styles.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
 
 function UploadTemplate({ user }) {
+  const navigate = useNavigate();
   const [file, setfile] = useState();
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
@@ -28,6 +30,7 @@ function UploadTemplate({ user }) {
     await fetch(`http://localhost:8070/templates/files/upload/`, {
       method: "POST",
       headers: {
+        "x-access-token": sessionStorage.getItem("token"),
         Accept: "application/json",
       },
       body: data,
@@ -50,6 +53,7 @@ function UploadTemplate({ user }) {
     fetch(`http://localhost:8070/templates/${user.username}`, {
       method: "POST",
       headers: {
+        "x-access-token": sessionStorage.getItem("token"),
         "Content-type": "application/json",
       },
       body: JSON.stringify(templateData),
@@ -62,6 +66,13 @@ function UploadTemplate({ user }) {
         alert("Error!");
       });
   };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div>

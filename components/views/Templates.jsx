@@ -58,9 +58,18 @@ function Templates() {
   };
 
   useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     //fetch uploaded templates
     async function fetchData() {
-      await fetch("http://localhost:8070/templates/")
+      await fetch("http://localhost:8070/templates/", {
+        method: "GET",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+        },
+      })
         .then((response) => response.json())
         .then((response) => {
           createArray(response);

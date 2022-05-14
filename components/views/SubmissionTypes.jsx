@@ -14,6 +14,10 @@ function SubmissionTypes() {
   const [submissionTypes, setsubmissionTypes] = useState([]);
 
   useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     async function fetchData() {
       await fetch("http://localhost:8070/submissiontypes/")
         .then((response) => response.json())

@@ -6,12 +6,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
 
 function Roles() {
+  const navigate = useNavigate();
   const [roles, setroles] = useState([]);
 
   const fetchRoles = async () => {
-    await fetch("http://localhost:8070/roles")
+    await fetch("http://localhost:8070/roles", {
+      method: "GET",
+      headers: {
+        "x-access-token": sessionStorage.getItem("token"),
+      },
+    })
       .then((response) => response.json())
       .then((response) => setroles(response))
       .catch((err) => {
@@ -19,6 +26,10 @@ function Roles() {
       });
   };
   useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     fetchRoles();
   }, []);
 

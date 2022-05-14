@@ -15,6 +15,7 @@ import Templates from "./components/views/Templates";
 import Roles from "./components/views/Roles";
 import Header from "./components/shared/Header";
 import AssignPanels from "./components/views/AssignPanels";
+import Login from "./components/views/Login";
 
 function App() {
   const [user, setuser] = useState({
@@ -33,12 +34,14 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Header></Header>
+        <Header user={user}></Header>
         <br />
         <BreadCrumb></BreadCrumb>
 
         <Routes>
           <Route exact path="/" element={<Home user={user} />} />
+          <Route path="/home" element={<Home user={user} />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
           <Route
             path="/create-marking-scheme"
             element={<CreateMarkingScheme user={user} />}

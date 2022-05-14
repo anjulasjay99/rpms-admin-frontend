@@ -58,6 +58,10 @@ function MarkingSchemes() {
   };
 
   useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     async function fetchData() {
       await fetch("http://localhost:8070/markingschemes/")
         .then((response) => response.json())

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -6,8 +6,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "../../assets/css/styles.module.css";
 import Container from "react-bootstrap/Container";
+import { useNavigate } from "react-router-dom";
 
 function CreateSubmissionType({ user }) {
+  const navigate = useNavigate();
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [isFileUpload, setisFileUpload] = useState(true);
@@ -32,6 +34,7 @@ function CreateSubmissionType({ user }) {
     fetch(`http://localhost:8070/submissiontypes/${user.username}`, {
       method: "POST",
       headers: {
+        "x-access-token": sessionStorage.getItem("token"),
         "Content-type": "application/json",
       },
       body: JSON.stringify(submissionType),
@@ -44,6 +47,14 @@ function CreateSubmissionType({ user }) {
         alert("Error!");
       });
   };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div>
       <Container>
