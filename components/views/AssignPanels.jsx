@@ -144,6 +144,7 @@ function AssignPanels() {
     fetch("http://localhost:8070/assignedpanels", {
       method: "POST",
       headers: {
+        "x-access-token": sessionStorage.getItem("token"),
         "Content-type": "application/json",
       },
       body: JSON.stringify(data),
@@ -158,6 +159,10 @@ function AssignPanels() {
   };
 
   useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
     fetchAssignedPanels();
     fetchGroups();
     fetchTopics();

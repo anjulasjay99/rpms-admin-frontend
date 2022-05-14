@@ -2,9 +2,14 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({ user }) {
+  const navigate = useNavigate();
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <div>
       <Navbar bg="light" variant="light" expand="lg" fixed="top">
@@ -16,9 +21,7 @@ function Header() {
               <Nav.Link to="/">Home</Nav.Link>
             </Nav>
             <Nav className="ml-auto">
-              <Nav.Link href="https://github.com/anjulasjay99" target="_blank">
-                Logout
-              </Nav.Link>
+              <Nav.Link onClick={logout}>Log Out</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

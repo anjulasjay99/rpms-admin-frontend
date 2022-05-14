@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { Link, useNavigate } from "react-router-dom";
 import * as styles from "../../assets/css/styles.module.css";
@@ -27,6 +27,14 @@ function Home() {
     alignItems: "center",
     cursor: "pointer",
   };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div>
       <Container>
