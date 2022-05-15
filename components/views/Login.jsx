@@ -10,7 +10,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 import jsonwebtoken from "jsonwebtoken";
 import { FaUserAlt, FaKey, FaBookReader } from "react-icons/fa";
-import { FcReadingEbook } from "react-icons/fc";
+import { FcReading } from "react-icons/fc";
 import bg from "../../assets/images/loginBgnew.jpg";
 
 //styles
@@ -95,7 +95,7 @@ function Login({ setUser, setLogin }) {
           <Row>
             <Col>
               <center>
-                <FcReadingEbook style={mainIcon} />
+                <FcReading style={mainIcon} />
               </center>
             </Col>
           </Row>

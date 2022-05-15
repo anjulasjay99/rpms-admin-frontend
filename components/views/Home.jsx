@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as styles from "../../assets/css/styles.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Table from "react-bootstrap/Table";
 import {
   FaFileAlt,
   FaFileSignature,
@@ -16,16 +17,17 @@ import {
 function Home() {
   const navigate = useNavigate();
   const card = {
-    height: "300px",
-    width: "300px",
-    background: "whitesmoke",
+    height: "80px",
+
+    background: "white",
     borderRadius: "5px",
     border: "1px solid #ccc",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
+    padding: "20px",
   };
 
   useEffect(() => {
@@ -54,54 +56,126 @@ function Home() {
         <Link to="/roles">Roles</Link>
         <br /> */}
         <Row>
-          <Col lg={3}>
+          <Col xs={12}>
+            <h5>Navigation</h5>
+          </Col>
+          <Col lg={2} md={3} sm={6}>
             <div
               style={card}
               onClick={() => navigate("/submission-types")}
-              className={styles.homeCard}
+              className="card"
             >
-              <FaFileUpload style={{ fontSize: "56px" }} />
+              <FaFileUpload style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Submission Types</label>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Submission Types
+              </label>
             </div>
           </Col>
-          <Col lg={3}>
+          <Col lg={2} md={3} sm={6}>
             <div style={card} onClick={() => navigate("/templates")}>
-              <FaFileAlt style={{ fontSize: "56px" }} />
+              <FaFileAlt style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Templates</label>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Templates
+              </label>
             </div>
           </Col>
-          <Col lg={3}>
+          <Col lg={2} md={3} sm={6}>
             <div style={card} onClick={() => navigate("/marking-schemes")}>
-              <FaFileSignature style={{ fontSize: "56px" }} />
+              <FaFileSignature style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Marking Schemes</label>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Marking Schemes
+              </label>
             </div>
           </Col>
-          <Col lg={3}>
+          <Col lg={2} md={3} sm={6}>
             <div style={card} onClick={() => navigate("/assign-panels")}>
-              <FaUserCheck style={{ fontSize: "56px" }} />
+              <FaUserCheck style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Assign Panels</label>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Assign Panels
+              </label>
+            </div>
+          </Col>
+
+          <Col lg={2} md={3} sm={6}>
+            <div style={card} onClick={() => navigate("/edit-user")}>
+              <FaUserAlt style={{ fontSize: "24px" }} />
+
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Users
+              </label>
+            </div>
+          </Col>
+          <Col lg={2} md={3} sm={6}>
+            <div style={card} onClick={() => navigate("/roles")}>
+              <FaUsers style={{ fontSize: "24px" }} />
+
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Roles
+              </label>
             </div>
           </Col>
         </Row>
         <br />
-        <Row className="justify-content-md-center">
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/edit-user")}>
-              <FaUserAlt style={{ fontSize: "56px" }} />
-
-              <label style={{ fontSize: "24px" }}>Users</label>
-            </div>
+        <br />
+        <Row>
+          <Col xs={12}>
+            <h5>Quick Links</h5>
           </Col>
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/roles")}>
-              <FaUsers style={{ fontSize: "56px" }} />
-
-              <label style={{ fontSize: "24px" }}>Roles</label>
-            </div>
+          <Col lg={2} md={3} sm={6} xs={12}>
+            <Link to="/create-submission-type">Create Submission Type</Link>
+          </Col>
+          <Col lg={2} md={3} sm={6} xs={12}>
+            <Link to="/upload-template">Upload Template</Link>
+          </Col>
+          <Col lg={2} md={3} sm={6} xs={12}>
+            <Link to="/create-marking-scheme">Create Marking Schemes</Link>
+          </Col>
+        </Row>
+        <br />
+        <br />
+        <Row>
+          <Col xs={12}>
+            <h5>Log In Activity</h5>
+          </Col>
+          <Col xs={12}>
+            <Table striped bordered hover size="sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Username/ Email</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>@mdo</td>
+                  <td>@twitter</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
         </Row>
       </Container>
