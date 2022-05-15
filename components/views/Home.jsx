@@ -37,7 +37,7 @@ function Home() {
 
   return (
     <div>
-      <Container>
+      <Container style={{ background: "white" }}>
         <h2>Home</h2>
         <br />
         {/* <Link to="/create-marking-scheme">Create Marking Scheme</Link> <br />
