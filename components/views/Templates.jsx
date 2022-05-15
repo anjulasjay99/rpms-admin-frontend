@@ -8,10 +8,21 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function Templates() {
   const navigate = useNavigate();
   const [templates, settemplates] = useState([]);
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Templates",
+      path: "/templates",
+    },
+  ];
 
   const openFile = (doc) => {
     fetch(`http://localhost:8070/templates/files/download/${doc.id}`)
@@ -83,6 +94,7 @@ function Templates() {
   }, []);
   return (
     <Container>
+      <BreadCrumb links={links}></BreadCrumb>
       <div>
         <br />
         <Row>

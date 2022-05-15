@@ -7,10 +7,21 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function Roles() {
   const navigate = useNavigate();
   const [roles, setroles] = useState([]);
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Roles",
+      path: "/roles",
+    },
+  ];
 
   const fetchRoles = async () => {
     await fetch("http://localhost:8070/roles", {
@@ -36,6 +47,7 @@ function Roles() {
   return (
     <div>
       <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <div>
           <br />
           <Row>

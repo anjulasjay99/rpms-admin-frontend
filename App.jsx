@@ -39,7 +39,7 @@ function App() {
       <BrowserRouter>
         <Header user={user}></Header>
         <br />
-        <BreadCrumb></BreadCrumb>
+
         <Routes>
           <Route exact path="/" element={<Home user={user} />} />
           <Route path="/home" element={<Home user={user} />} />

@@ -7,6 +7,7 @@ import styles from "../../assets/css/styles.module.css";
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function UploadTemplate({ user }) {
   const navigate = useNavigate();
@@ -14,6 +15,21 @@ function UploadTemplate({ user }) {
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [visibility, setvisibility] = useState("Public");
+
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Templates",
+      path: "/templates",
+    },
+    {
+      name: "Upload Template",
+      path: "/upload-templates",
+    },
+  ];
 
   const onFileSelect = (event) => {
     setfile(event.target.files[0]);
@@ -77,6 +93,7 @@ function UploadTemplate({ user }) {
   return (
     <div>
       <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <br />
         <Row>
           <Col>

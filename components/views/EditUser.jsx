@@ -7,9 +7,24 @@ import Col from "react-bootstrap/Col";
 import styles from "../../assets/css/styles.module.css";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function EditUser() {
   const navigate = useNavigate();
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Users",
+      path: "/users",
+    },
+    {
+      name: "Edit User",
+      path: "/edit-user",
+    },
+  ];
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
@@ -20,6 +35,7 @@ function EditUser() {
   return (
     <div>
       <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <br />
         <Row>
           <Col>

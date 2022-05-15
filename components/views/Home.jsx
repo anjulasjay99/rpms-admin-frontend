@@ -13,22 +13,48 @@ import {
   FaUsers,
   FaUserAlt,
 } from "react-icons/fa";
+import bg from "../../assets/images/loginBgnew.jpg";
+import BreadCrumb from "../shared/BreadCrumb";
+
+const card = {
+  height: "80px",
+  background: "white",
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  cursor: "pointer",
+  padding: "20px",
+};
+
+const parentDiv = {
+  backgroundImage: `url(${bg})`,
+  position: "absolute",
+  top: "50px",
+  bottom: 0,
+  right: 0,
+  left: 0,
+};
+
+const parentCont = {
+  background: "white",
+  position: "absolute",
+  top: "30px",
+  bottom: "30px",
+  right: "50px",
+  left: "50px",
+};
 
 function Home() {
   const navigate = useNavigate();
-  const card = {
-    height: "80px",
-
-    background: "white",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    padding: "20px",
-  };
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+  ];
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -39,22 +65,10 @@ function Home() {
 
   return (
     <div>
-      <Container style={{ background: "white" }}>
+      <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <h2>Home</h2>
         <br />
-        {/* <Link to="/create-marking-scheme">Create Marking Scheme</Link> <br />
-        <Link to="/create-submission-type">Create Submission Type</Link> <br />
-        <Link to="/upload-template">Upload Template</Link>
-        <br />
-        <Link to="/edit-user">Edit User</Link>
-        <br />
-        <Link to="/submission-types">Submission Types</Link> <br />
-        <Link to="/marking-schemes">Marking Schemes</Link>
-        <br />
-        <Link to="/templates">Templates</Link>
-        <br />
-        <Link to="/roles">Roles</Link>
-        <br /> */}
         <Row>
           <Col xs={12}>
             <h5>Navigation</h5>
@@ -126,13 +140,25 @@ function Home() {
             <h5>Quick Links</h5>
           </Col>
           <Col lg={2} md={3} sm={6} xs={12}>
-            <Link to="/create-submission-type">Create Submission Type</Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/create-submission-type"
+            >
+              Create Submission Type
+            </Link>
           </Col>
           <Col lg={2} md={3} sm={6} xs={12}>
-            <Link to="/upload-template">Upload Template</Link>
+            <Link style={{ textDecoration: "none" }} to="/upload-template">
+              Upload Template
+            </Link>
           </Col>
           <Col lg={2} md={3} sm={6} xs={12}>
-            <Link to="/create-marking-scheme">Create Marking Schemes</Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/create-marking-scheme"
+            >
+              Create Marking Schemes
+            </Link>
           </Col>
         </Row>
         <br />

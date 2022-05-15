@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Modal from "react-bootstrap/Modal";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 //styles
 const panelRowStyle = {
@@ -51,6 +52,17 @@ function AssignPanels() {
   const [topics, settopics] = useState([]);
   const [panelToAssign, setpanelToAssign] = useState("dharshana.r@sliit.lk");
   const [selectedGroup, setselectedGroup] = useState("");
+
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Assign Panels",
+      path: "/assign-panels",
+    },
+  ];
 
   //close modal
   const handleClose = () => setShow(false);
@@ -170,6 +182,7 @@ function AssignPanels() {
 
   return (
     <Container>
+      <BreadCrumb links={links}></BreadCrumb>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Assign Panel</Modal.Title>

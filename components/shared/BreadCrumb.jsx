@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
-function BreadCrumb() {
+function BreadCrumb({ links }) {
   const location = useLocation();
   const [show, setshow] = useState(true);
 
@@ -20,15 +20,23 @@ function BreadCrumb() {
   } else {
     return (
       <div style={{ marginTop: "50px" }}>
-        <Container>
-          <Breadcrumb>
-            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-              Library
-            </Breadcrumb.Item>
-            <Breadcrumb.Item active>Data</Breadcrumb.Item>
-          </Breadcrumb>
-        </Container>
+        <Breadcrumb>
+          {links.map((link, index) => {
+            return (
+              <Breadcrumb.Item
+                active={index === links.length - 1 ? true : false}
+              >
+                {index === links.length - 1 ? (
+                  <label>{link.name}</label>
+                ) : (
+                  <Link style={{ textDecoration: "none" }} to={link.path}>
+                    {link.name}
+                  </Link>
+                )}
+              </Breadcrumb.Item>
+            );
+          })}
+        </Breadcrumb>
       </div>
     );
   }
