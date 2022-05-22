@@ -15,37 +15,8 @@ import {
 } from "react-icons/fa";
 import bg from "../../assets/images/loginBgnew.jpg";
 import BreadCrumb from "../shared/BreadCrumb";
-
-const card = {
-  height: "80px",
-  background: "white",
-  borderRadius: "5px",
-  border: "1px solid #ccc",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-  cursor: "pointer",
-  padding: "20px",
-};
-
-const parentDiv = {
-  backgroundImage: `url(${bg})`,
-  position: "absolute",
-  top: "50px",
-  bottom: 0,
-  right: 0,
-  left: 0,
-};
-
-const parentCont = {
-  background: "white",
-  position: "absolute",
-  top: "30px",
-  bottom: "30px",
-  right: "50px",
-  left: "50px",
-};
+import { NavCard } from "../../assets/css/NavCard.styled";
+import { ParentDiv } from "../../assets/css/ParentDiv.styled";
 
 function Home() {
   const navigate = useNavigate();
@@ -64,8 +35,17 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <Container>
+    <ParentDiv>
+      <Container
+        style={{
+          background: "white",
+          position: "absolute",
+          top: "25px",
+          bottom: 0,
+          left: "50px",
+          right: "50px",
+        }}
+      >
         <BreadCrumb links={links}></BreadCrumb>
         <h2>Home</h2>
         <br />
@@ -74,63 +54,59 @@ function Home() {
             <h5>Navigation</h5>
           </Col>
           <Col lg={2} md={3} sm={6}>
-            <div
-              style={card}
-              onClick={() => navigate("/submission-types")}
-              className="card"
-            >
+            <NavCard onClick={() => navigate("/submission-types")}>
               <FaFileUpload style={{ fontSize: "24px" }} />
 
               <label style={{ fontSize: "16px", marginLeft: "5px" }}>
                 Submission Types
               </label>
-            </div>
+            </NavCard>
           </Col>
           <Col lg={2} md={3} sm={6}>
-            <div style={card} onClick={() => navigate("/templates")}>
+            <NavCard onClick={() => navigate("/templates")}>
               <FaFileAlt style={{ fontSize: "24px" }} />
 
               <label style={{ fontSize: "16px", marginLeft: "5px" }}>
                 Templates
               </label>
-            </div>
+            </NavCard>
           </Col>
           <Col lg={2} md={3} sm={6}>
-            <div style={card} onClick={() => navigate("/marking-schemes")}>
+            <NavCard onClick={() => navigate("/marking-schemes")}>
               <FaFileSignature style={{ fontSize: "24px" }} />
 
               <label style={{ fontSize: "16px", marginLeft: "5px" }}>
                 Marking Schemes
               </label>
-            </div>
+            </NavCard>
           </Col>
           <Col lg={2} md={3} sm={6}>
-            <div style={card} onClick={() => navigate("/assign-panels")}>
+            <NavCard onClick={() => navigate("/assign-panels")}>
               <FaUserCheck style={{ fontSize: "24px" }} />
 
               <label style={{ fontSize: "16px", marginLeft: "5px" }}>
                 Assign Panels
               </label>
-            </div>
+            </NavCard>
           </Col>
 
           <Col lg={2} md={3} sm={6}>
-            <div style={card} onClick={() => navigate("/edit-user")}>
+            <NavCard onClick={() => navigate("/users")}>
               <FaUserAlt style={{ fontSize: "24px" }} />
 
               <label style={{ fontSize: "16px", marginLeft: "5px" }}>
                 Users
               </label>
-            </div>
+            </NavCard>
           </Col>
           <Col lg={2} md={3} sm={6}>
-            <div style={card} onClick={() => navigate("/roles")}>
+            <NavCard onClick={() => navigate("/roles")}>
               <FaUsers style={{ fontSize: "24px" }} />
 
               <label style={{ fontSize: "16px", marginLeft: "5px" }}>
                 Roles
               </label>
-            </div>
+            </NavCard>
           </Col>
         </Row>
         <br />
@@ -206,7 +182,7 @@ function Home() {
         </Row>
       </Container>
       <br />
-    </div>
+    </ParentDiv>
   );
 }
 

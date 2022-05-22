@@ -17,6 +17,7 @@ import Header from "./components/shared/Header";
 import AssignPanels from "./components/views/AssignPanels";
 import Login from "./components/views/Login";
 import bg from "./assets/images/loginBgnew.jpg";
+import Users from "./components/views/Users";
 
 function App() {
   const [user, setuser] = useState({});
@@ -71,6 +72,7 @@ function App() {
           <Route path="/templates" element={<Templates user={user} />} />
           <Route path="/roles" element={<Roles user={user} />} />
           <Route path="/assign-panels" element={<AssignPanels user={user} />} />
+          <Route path="/users" element={<Users user={user} />} />
         </Routes>
       </BrowserRouter>
     </div>

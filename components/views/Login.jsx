@@ -74,6 +74,7 @@ function Login({ setUser, setLogin }) {
           setloading(false);
           navigate("/home");
         } else {
+          setloading(false);
           alert(res.message);
         }
       })
