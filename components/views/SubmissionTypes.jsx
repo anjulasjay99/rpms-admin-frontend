@@ -8,10 +8,21 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function SubmissionTypes() {
   const navigate = useNavigate();
   const [submissionTypes, setsubmissionTypes] = useState([]);
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Submission Types",
+      path: "/submission-types",
+    },
+  ];
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -34,6 +45,7 @@ function SubmissionTypes() {
 
   return (
     <Container>
+      <BreadCrumb links={links}></BreadCrumb>
       <div>
         <br />
         <Row>

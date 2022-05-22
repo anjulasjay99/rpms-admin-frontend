@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
-function BreadCrumb() {
-  return (
-    <div style={{ marginTop: "50px" }}>
-      <Container>
+function BreadCrumb({ links }) {
+  const location = useLocation();
+  const [show, setshow] = useState(true);
+
+  useEffect(() => {
+    if (location.pathname === "/login") {
+      setshow(false);
+    } else {
+      setshow(true);
+    }
+  }, [location]);
+
+  if (!show) {
+    return <></>;
+  } else {
+    return (
+      <div style={{ marginTop: "50px" }}>
         <Breadcrumb>
-          <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-            Library
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active>Data</Breadcrumb.Item>
+          {links.map((link, index) => {
+            return (
+              <Breadcrumb.Item
+                active={index === links.length - 1 ? true : false}
+              >
+                {index === links.length - 1 ? (
+                  <label>{link.name}</label>
+                ) : (
+                  <Link style={{ textDecoration: "none" }} to={link.path}>
+                    {link.name}
+                  </Link>
+                )}
+              </Breadcrumb.Item>
+            );
+          })}
         </Breadcrumb>
-      </Container>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default BreadCrumb;

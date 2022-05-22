@@ -8,10 +8,22 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function MarkingSchemes() {
   const navigate = useNavigate();
   const [markingSchemes, setmarkingSchemes] = useState([]);
+
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Marking Schemes",
+      path: "/marking-schemes",
+    },
+  ];
 
   const openFile = (doc) => {
     fetch(`http://localhost:8070/markingschemes/files/download/${doc.id}`)
@@ -79,6 +91,7 @@ function MarkingSchemes() {
   return (
     <div>
       <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <br />
         <Row>
           <Col>

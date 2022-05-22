@@ -8,6 +8,7 @@ import styles from "../../assets/css/styles.module.css";
 import Criteria from "../../components/shared/Criteria";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function CreateMarkingScheme({ user }) {
   const navigate = useNavigate();
@@ -21,6 +22,21 @@ function CreateMarkingScheme({ user }) {
   const [description, setdescription] = useState("");
   const [visibility, setvisibility] = useState("Public");
   const [file, setfile] = useState();
+
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Marking Schemes",
+      path: "/marking-schemes",
+    },
+    {
+      name: "Create Marking Scheme",
+      path: "/create-marking-scheme",
+    },
+  ];
 
   //triggers when user selects a file
   const onFileSelect = (event) => {
@@ -115,6 +131,7 @@ function CreateMarkingScheme({ user }) {
   return (
     <div>
       <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <br />
         <Row>
           <Col>

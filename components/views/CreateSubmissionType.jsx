@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import styles from "../../assets/css/styles.module.css";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import BreadCrumb from "../shared/BreadCrumb";
 
 function CreateSubmissionType({ user }) {
   const navigate = useNavigate();
@@ -16,6 +17,21 @@ function CreateSubmissionType({ user }) {
   const [isEditable, setisEditable] = useState(true);
   const [isMultipleSubmissions, setisMultipleSubmissions] = useState(true);
   const [visibility, setvisibility] = useState("Public");
+
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+    {
+      name: "Submission Types",
+      path: "/submission-types",
+    },
+    {
+      name: "Create Submission Type",
+      path: "/create-submission-type",
+    },
+  ];
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -58,6 +74,7 @@ function CreateSubmissionType({ user }) {
   return (
     <div>
       <Container>
+        <BreadCrumb links={links}></BreadCrumb>
         <br />
         <Row>
           <Col>

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as styles from "../../assets/css/styles.module.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Table from "react-bootstrap/Table";
 import {
   FaFileAlt,
   FaFileSignature,
@@ -12,21 +13,19 @@ import {
   FaUsers,
   FaUserAlt,
 } from "react-icons/fa";
+import bg from "../../assets/images/loginBgnew.jpg";
+import BreadCrumb from "../shared/BreadCrumb";
+import { NavCard } from "../../assets/css/NavCard.styled";
+import { ParentDiv } from "../../assets/css/ParentDiv.styled";
 
 function Home() {
   const navigate = useNavigate();
-  const card = {
-    height: "300px",
-    width: "300px",
-    background: "whitesmoke",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-  };
+  const links = [
+    {
+      name: "Home",
+      path: "/home",
+    },
+  ];
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -36,77 +35,154 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <Container>
+    <ParentDiv>
+      <Container
+        style={{
+          background: "white",
+          position: "absolute",
+          top: "25px",
+          bottom: 0,
+          left: "50px",
+          right: "50px",
+        }}
+      >
+        <BreadCrumb links={links}></BreadCrumb>
         <h2>Home</h2>
         <br />
-        {/* <Link to="/create-marking-scheme">Create Marking Scheme</Link> <br />
-        <Link to="/create-submission-type">Create Submission Type</Link> <br />
-        <Link to="/upload-template">Upload Template</Link>
-        <br />
-        <Link to="/edit-user">Edit User</Link>
-        <br />
-        <Link to="/submission-types">Submission Types</Link> <br />
-        <Link to="/marking-schemes">Marking Schemes</Link>
-        <br />
-        <Link to="/templates">Templates</Link>
-        <br />
-        <Link to="/roles">Roles</Link>
-        <br /> */}
         <Row>
-          <Col lg={3}>
-            <div
-              style={card}
-              onClick={() => navigate("/submission-types")}
-              className={styles.homeCard}
-            >
-              <FaFileUpload style={{ fontSize: "56px" }} />
-
-              <label style={{ fontSize: "24px" }}>Submission Types</label>
-            </div>
+          <Col xs={12}>
+            <h5>Navigation</h5>
           </Col>
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/templates")}>
-              <FaFileAlt style={{ fontSize: "56px" }} />
+          <Col lg={2} md={3} sm={6}>
+            <NavCard onClick={() => navigate("/submission-types")}>
+              <FaFileUpload style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Templates</label>
-            </div>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Submission Types
+              </label>
+            </NavCard>
           </Col>
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/marking-schemes")}>
-              <FaFileSignature style={{ fontSize: "56px" }} />
+          <Col lg={2} md={3} sm={6}>
+            <NavCard onClick={() => navigate("/templates")}>
+              <FaFileAlt style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Marking Schemes</label>
-            </div>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Templates
+              </label>
+            </NavCard>
           </Col>
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/assign-panels")}>
-              <FaUserCheck style={{ fontSize: "56px" }} />
+          <Col lg={2} md={3} sm={6}>
+            <NavCard onClick={() => navigate("/marking-schemes")}>
+              <FaFileSignature style={{ fontSize: "24px" }} />
 
-              <label style={{ fontSize: "24px" }}>Assign Panels</label>
-            </div>
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Marking Schemes
+              </label>
+            </NavCard>
+          </Col>
+          <Col lg={2} md={3} sm={6}>
+            <NavCard onClick={() => navigate("/assign-panels")}>
+              <FaUserCheck style={{ fontSize: "24px" }} />
+
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Assign Panels
+              </label>
+            </NavCard>
+          </Col>
+
+          <Col lg={2} md={3} sm={6}>
+            <NavCard onClick={() => navigate("/users")}>
+              <FaUserAlt style={{ fontSize: "24px" }} />
+
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Users
+              </label>
+            </NavCard>
+          </Col>
+          <Col lg={2} md={3} sm={6}>
+            <NavCard onClick={() => navigate("/roles")}>
+              <FaUsers style={{ fontSize: "24px" }} />
+
+              <label style={{ fontSize: "16px", marginLeft: "5px" }}>
+                Roles
+              </label>
+            </NavCard>
           </Col>
         </Row>
         <br />
-        <Row className="justify-content-md-center">
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/edit-user")}>
-              <FaUserAlt style={{ fontSize: "56px" }} />
-
-              <label style={{ fontSize: "24px" }}>Users</label>
-            </div>
+        <br />
+        <Row>
+          <Col xs={12}>
+            <h5>Quick Links</h5>
           </Col>
-          <Col lg={3}>
-            <div style={card} onClick={() => navigate("/roles")}>
-              <FaUsers style={{ fontSize: "56px" }} />
-
-              <label style={{ fontSize: "24px" }}>Roles</label>
-            </div>
+          <Col lg={2} md={3} sm={6} xs={12}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/create-submission-type"
+            >
+              Create Submission Type
+            </Link>
+          </Col>
+          <Col lg={2} md={3} sm={6} xs={12}>
+            <Link style={{ textDecoration: "none" }} to="/upload-template">
+              Upload Template
+            </Link>
+          </Col>
+          <Col lg={2} md={3} sm={6} xs={12}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to="/create-marking-scheme"
+            >
+              Create Marking Schemes
+            </Link>
+          </Col>
+        </Row>
+        <br />
+        <br />
+        <Row>
+          <Col xs={12}>
+            <h5>Log In Activity</h5>
+          </Col>
+          <Col xs={12}>
+            <Table striped bordered hover size="sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Username/ Email</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>@mdo</td>
+                  <td>@twitter</td>
+                  <td>@mdo</td>
+                  <td>@mdo</td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
         </Row>
       </Container>
       <br />
-    </div>
+    </ParentDiv>
   );
 }
 

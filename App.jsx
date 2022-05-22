@@ -16,15 +16,19 @@ import Roles from "./components/views/Roles";
 import Header from "./components/shared/Header";
 import AssignPanels from "./components/views/AssignPanels";
 import Login from "./components/views/Login";
+import bg from "./assets/images/loginBgnew.jpg";
+import Users from "./components/views/Users";
 
 function App() {
-  const [user, setuser] = useState({
-    username: "admin123",
-    password: "abc123",
-  });
+  const [user, setuser] = useState({});
+  const [isLogin, setisLogin] = useState(false);
 
   const setUser = (loggedUser) => {
-    setUser(loggedUser);
+    setuser(loggedUser);
+  };
+
+  const setLogin = (val) => {
+    setisLogin(val);
   };
 
   useEffect(() => {
@@ -36,12 +40,14 @@ function App() {
       <BrowserRouter>
         <Header user={user}></Header>
         <br />
-        <BreadCrumb></BreadCrumb>
 
         <Routes>
           <Route exact path="/" element={<Home user={user} />} />
           <Route path="/home" element={<Home user={user} />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route
+            path="/login"
+            element={<Login setUser={setUser} setLogin={setLogin} />}
+          />
           <Route
             path="/create-marking-scheme"
             element={<CreateMarkingScheme user={user} />}
@@ -66,6 +72,7 @@ function App() {
           <Route path="/templates" element={<Templates user={user} />} />
           <Route path="/roles" element={<Roles user={user} />} />
           <Route path="/assign-panels" element={<AssignPanels user={user} />} />
+          <Route path="/users" element={<Users user={user} />} />
         </Routes>
       </BrowserRouter>
     </div>
