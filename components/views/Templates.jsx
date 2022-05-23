@@ -25,12 +25,12 @@ function Templates() {
   ];
 
   const openFile = (doc) => {
-    fetch(`http://localhost:8070/templates/files/download/${doc.id}`)
+    fetch(`http://localhost:8070/templates/files/download/${doc.fileId}`)
       .then((response) => response.blob())
       .then((blob) => {
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.setAttribute("download", doc.name);
+        link.setAttribute("download", doc.document);
         link.setAttribute("target", "_blank");
         document.body.appendChild(link);
         link.click();
@@ -38,34 +38,6 @@ function Templates() {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const createArray = (res) => {
-    let arr = [];
-    res.map((data) => {
-      let splittedFileName = data.document.split("-");
-      let originalName = "";
-
-      for (let i = 1; i < splittedFileName.length; i++) {
-        originalName += splittedFileName[i];
-        if (i < splittedFileName.length - 1) {
-          originalName += "-";
-        }
-      }
-
-      arr.push({
-        name: data.name,
-        createdBy: data.createdBy,
-        dateCreated: data.dateCreated,
-        visibility: data.visibility,
-        document: {
-          id: splittedFileName[0],
-          name: originalName,
-          file: data.document,
-        },
-      });
-    });
-    settemplates(arr);
   };
 
   useEffect(() => {
@@ -83,7 +55,7 @@ function Templates() {
       })
         .then((response) => response.json())
         .then((response) => {
-          createArray(response);
+          settemplates(response);
         })
         .catch((err) => {
           console.log(err);
@@ -145,8 +117,8 @@ function Templates() {
                       <td>{template.dateCreated}</td>
                       <td>{template.visibility}</td>
                       <td>
-                        <a href="#" onClick={() => openFile(template.document)}>
-                          {template.document.name}
+                        <a href="#" onClick={() => openFile(template)}>
+                          {template.document}
                         </a>
                       </td>
                     </tr>

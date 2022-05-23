@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { Link, useNavigate } from "react-router-dom";
 import * as styles from "../../assets/css/styles.module.css";
@@ -26,12 +26,31 @@ function Home() {
       path: "/home",
     },
   ];
+  const [lognActivities, setlognActivities] = useState([]);
+
+  const fecthLoginActivities = async () => {
+    await fetch("http://localhost:8070/loginactivities", {
+      method: "GET",
+      headers: {
+        "x-access-token": sessionStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => [setlognActivities(res)])
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
       navigate("/login");
     }
+
+    setTimeout(() => {
+      fecthLoginActivities();
+    }, 1000);
   }, []);
 
   return (
@@ -149,33 +168,21 @@ function Home() {
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Username/ Email</th>
-                  <th>Date</th>
-                  <th>Time</th>
+                  <th>Email</th>
+                  <th>Date & Time</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>@mdo</td>
-                  <td>@twitter</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
+                {lognActivities.map((data, index) => {
+                  return (
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{data.name}</td>
+                      <td>{data.email}</td>
+                      <td>{data.dateAndTime}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
           </Col>

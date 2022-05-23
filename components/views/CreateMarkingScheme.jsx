@@ -62,6 +62,7 @@ function CreateMarkingScheme({ user }) {
     data.append("markingscheme", file);
 
     let document = "";
+    let fileId = "";
 
     await fetch(`http://localhost:8070/markingschemes/files/upload/`, {
       method: "POST",
@@ -73,7 +74,8 @@ function CreateMarkingScheme({ user }) {
     })
       .then((response) => response.json())
       .then((response) => {
-        document = response;
+        document = response.document;
+        fileId = response.fileId;
       })
       .catch((err) => {
         alert("Error!");
@@ -85,9 +87,10 @@ function CreateMarkingScheme({ user }) {
       criterias,
       visibility,
       document,
+      fileId,
     };
 
-    fetch(`http://localhost:8070/markingschemes/${user.username}`, {
+    fetch(`http://localhost:8070/markingschemes/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
