@@ -25,13 +25,15 @@ function MarkingSchemes() {
     },
   ];
 
-  const openFile = (doc) => {
-    fetch(`http://localhost:8070/markingschemes/files/download/${doc.id}`)
+  const openFile = (scheme) => {
+    fetch(
+      `http://localhost:8070/markingschemes/files/download/${scheme.fileId}`
+    )
       .then((response) => response.blob())
       .then((blob) => {
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-        link.setAttribute("download", doc.name);
+        link.setAttribute("download", scheme.document);
         link.setAttribute("target", "_blank");
         document.body.appendChild(link);
         link.click();
@@ -39,34 +41,6 @@ function MarkingSchemes() {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const createArray = (res) => {
-    let arr = [];
-    res.map((data) => {
-      let splittedFileName = data.document.split("-");
-      let originalName = "";
-
-      for (let i = 1; i < splittedFileName.length; i++) {
-        originalName += splittedFileName[i];
-        if (i < splittedFileName.length - 1) {
-          originalName += "-";
-        }
-      }
-
-      arr.push({
-        name: data.name,
-        createdBy: data.createdBy,
-        dateCreated: data.dateCreated,
-        visibility: data.visibility,
-        document: {
-          id: splittedFileName[0],
-          name: originalName,
-          file: data.document,
-        },
-      });
-    });
-    setmarkingSchemes(arr);
   };
 
   useEffect(() => {
@@ -78,7 +52,7 @@ function MarkingSchemes() {
       await fetch("http://localhost:8070/markingschemes/")
         .then((response) => response.json())
         .then((response) => {
-          createArray(response);
+          setmarkingSchemes(response);
         })
         .catch((err) => {
           console.log(err);
@@ -142,8 +116,8 @@ function MarkingSchemes() {
                       <td>{scheme.dateCreated}</td>
                       <td>{scheme.visibility}</td>
                       <td>
-                        <a href="#" onClick={() => openFile(scheme.document)}>
-                          {scheme.document.name}
+                        <a href="#" onClick={() => openFile(scheme)}>
+                          {scheme.document}
                         </a>
                       </td>
                     </tr>

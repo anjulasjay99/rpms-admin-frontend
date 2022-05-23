@@ -42,6 +42,7 @@ function UploadTemplate({ user }) {
     data.append("template", file);
 
     let document = "";
+    let fileId = "";
 
     await fetch(`http://localhost:8070/templates/files/upload/`, {
       method: "POST",
@@ -53,7 +54,9 @@ function UploadTemplate({ user }) {
     })
       .then((response) => response.json())
       .then((response) => {
-        document = response;
+        console.log(response);
+        document = response.document;
+        fileId = response.fileId;
       })
       .catch((err) => {
         alert("Error!");
@@ -63,6 +66,7 @@ function UploadTemplate({ user }) {
       name,
       description,
       document,
+      fileId,
       visibility,
     };
 
