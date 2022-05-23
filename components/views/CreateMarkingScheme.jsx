@@ -90,7 +90,7 @@ function CreateMarkingScheme({ user }) {
       fileId,
     };
 
-    fetch(`http://localhost:8070/markingschemes/${user.username}`, {
+    fetch(`http://localhost:8070/markingschemes/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),

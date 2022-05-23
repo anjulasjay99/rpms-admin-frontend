@@ -70,7 +70,7 @@ function UploadTemplate({ user }) {
       visibility,
     };
 
-    fetch(`http://localhost:8070/templates/${user.username}`, {
+    fetch(`http://localhost:8070/templates/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
