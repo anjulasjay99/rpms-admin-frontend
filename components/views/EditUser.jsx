@@ -141,9 +141,9 @@ function EditUser() {
     settelNo(location.state.user.telNo);
     setpassword(location.state.user.password);
 
-    if (role.toLocaleLowerCase() === "admin") {
+    if (location.state.user.role.trim().toLowerCase() === "admin") {
       setemail(location.state.user.email);
-    } else if (role.toLocaleLowerCase() === "student") {
+    } else if (location.state.user.role.trim().toLowerCase() === "student") {
       setemail(location.state.user.email);
     } else {
       setemail(location.state.user.sliitEmail);

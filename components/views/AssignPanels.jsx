@@ -7,6 +7,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
@@ -50,10 +52,11 @@ function AssignPanels() {
   ]);
   const [assignedPanels, setassignedPanels] = useState([]);
   const [topics, settopics] = useState([]);
-  const [panelToAssign, setpanelToAssign] = useState("dharshana.r@sliit.lk");
+  const [panelToAssign, setpanelToAssign] = useState("");
   const [selectedGroup, setselectedGroup] = useState("");
   const [keyword1, setkeyword1] = useState("");
   const [keyword2, setkeyword2] = useState("");
+  const [showAll, setshowAll] = useState(false);
 
   const links = [
     {
@@ -67,7 +70,19 @@ function AssignPanels() {
   ];
 
   //close modal
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setshowAll(false);
+    setShow(false);
+  };
+
+  //set show all
+  const setShowAllStaff = (val) => {
+    if (val === "1") {
+      setshowAll(false);
+    } else {
+      setshowAll(true);
+    }
+  };
 
   //open modal
   const handleShow = (groupID) => {
@@ -101,10 +116,11 @@ function AssignPanels() {
 
   //fetch all staff members
   const fetchStaffMembers = async () => {
-    await fetch("http://localhost:8070/staff/")
+    await fetch("http://localhost:8070/staff/getAll")
       .then((response) => response.json())
       .then((response) => {
         setpanels(response);
+        setpanelToAssign(response[0].sliitEmail);
       })
       .catch((err) => {
         console.log(err);
@@ -200,6 +216,7 @@ function AssignPanels() {
     fetchAssignedPanels();
     fetchGroups();
     fetchTopics();
+    fetchStaffMembers();
   }, []);
 
   return (
@@ -211,26 +228,47 @@ function AssignPanels() {
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col>
+            <Col lg={7}>
               <InputGroup>
                 <FormControl
+                  id="searchPanel"
                   placeholder="Search here"
                   value={keyword2}
                   onChange={(e) => setkeyword2(e.target.value)}
                 />
               </InputGroup>
             </Col>
+            <Col lg={5}>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => setShowAllStaff(e.target.value)}
+              >
+                <option value="1">{getTopic(selectedGroup)}</option>
+                <option value="2">Show All</option>
+              </Form.Select>
+            </Col>
           </Row>
+
           <div style={modalContentDiv}>
             {panels
               .filter((panel) => {
                 if (keyword2 !== "") {
+                  let name = `${panel.firstName} ${panel.lastName}`;
                   if (
-                    panel.name
+                    name
                       .trim()
                       .toLowerCase()
                       .includes(keyword2.trim().toLowerCase())
                   ) {
+                    return panel;
+                  }
+                } else {
+                  return panel;
+                }
+              })
+              .filter((panel) => {
+                if (!showAll) {
+                  if (panel.field === getTopic(selectedGroup)) {
                     return panel;
                   }
                 } else {
@@ -244,11 +282,15 @@ function AssignPanels() {
                       <div style={panelRowStyle}>
                         <div>
                           <label style={{ fontWeight: 600 }}>
-                            {panel.name}
+                            {`${panel.firstName} ${panel.lastName}`}
                           </label>
                           <br />
                           <label style={{ fontWeight: 300, fontSize: "14px" }}>
-                            {panel.email}
+                            {panel.sliitEmail}
+                          </label>
+                          <br />
+                          <label style={{ fontWeight: 300, fontSize: "14px" }}>
+                            <i>{`Field : ${panel.field}`}</i>
                           </label>
                         </div>
                         <div
@@ -263,9 +305,9 @@ function AssignPanels() {
                           <input
                             type="radio"
                             name="panel"
-                            value={panel.email}
+                            value={panel.sliitEmail}
                             onChange={(e) => setpanelToAssign(e.target.value)}
-                            checked={panelToAssign === panel.email}
+                            checked={panelToAssign === panel.sliitEmail}
                           />
                         </div>
                       </div>
