@@ -34,6 +34,11 @@ function EditUser() {
     },
   ];
 
+  //go back to previous page
+  const onCancel = () => {
+    navigate(-1);
+  };
+
   const onSave = (e) => {
     e.preventDefault();
     if (role.toLocaleLowerCase() === "admin") {
@@ -230,6 +235,7 @@ function EditUser() {
               <Button
                 variant="secondary"
                 style={{ marginRight: "5px", float: "right" }}
+                onClick={onCancel}
               >
                 Cancel
               </Button>

@@ -33,6 +33,11 @@ function CreateSubmissionType({ user }) {
     },
   ];
 
+  //go back to previous page
+  const onCancel = () => {
+    navigate(-1);
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -181,6 +186,7 @@ function CreateSubmissionType({ user }) {
                 <Button
                   variant="secondary"
                   style={{ marginRight: "5px", float: "right" }}
+                  onClick={onCancel}
                 >
                   Cancel
                 </Button>
