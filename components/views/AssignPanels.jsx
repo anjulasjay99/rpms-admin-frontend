@@ -155,21 +155,41 @@ function AssignPanels() {
       groupId: selectedGroup,
       panel: panelToAssign,
     };
-    fetch("http://localhost:8070/assignedpanels", {
-      method: "POST",
-      headers: {
-        "x-access-token": sessionStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then(() => {
-        alert("Success!");
-        setShow(false);
+
+    //check whether a panel is already assigned to the selected group or not
+    if (getAssignedPanel(data.groupId) === "Unassigned") {
+      fetch("http://localhost:8070/assignedpanels", {
+        method: "POST",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
-      .catch((err) => {
-        alert(err);
-      });
+        .then(() => {
+          alert("Success!");
+          setShow(false);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } else {
+      fetch("http://localhost:8070/assignedpanels", {
+        method: "PUT",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then(() => {
+          alert("Success!");
+          setShow(false);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
 
   useEffect(() => {
