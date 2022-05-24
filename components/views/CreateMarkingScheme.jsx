@@ -38,6 +38,11 @@ function CreateMarkingScheme({ user }) {
     },
   ];
 
+  //go back to previous page
+  const onCancel = () => {
+    navigate(-1);
+  };
+
   //triggers when user selects a file
   const onFileSelect = (event) => {
     setfile(event.target.files[0]);
@@ -292,6 +297,7 @@ function CreateMarkingScheme({ user }) {
               <Button
                 variant="secondary"
                 style={{ marginRight: "5px", float: "right" }}
+                onClick={onCancel}
               >
                 Cancel
               </Button>

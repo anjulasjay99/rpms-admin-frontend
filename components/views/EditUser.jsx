@@ -34,6 +34,11 @@ function EditUser() {
     },
   ];
 
+  //go back to previous page
+  const onCancel = () => {
+    navigate(-1);
+  };
+
   const onSave = (e) => {
     e.preventDefault();
     if (role.toLocaleLowerCase() === "admin") {
@@ -209,12 +214,12 @@ function EditUser() {
             </Col>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Role</Form.Label>
-                <Form.Select>
-                  <option value="admin">Admin</option>
-                  <option value="staff">Staff</option>
-                  <option value="student">Student</option>
-                </Form.Select>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -230,6 +235,7 @@ function EditUser() {
               <Button
                 variant="secondary"
                 style={{ marginRight: "5px", float: "right" }}
+                onClick={onCancel}
               >
                 Cancel
               </Button>

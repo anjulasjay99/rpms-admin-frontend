@@ -13,6 +13,8 @@ import BreadCrumb from "../shared/BreadCrumb";
 function SubmissionTypes() {
   const navigate = useNavigate();
   const [submissionTypes, setsubmissionTypes] = useState([]);
+  const [keyword, setkeyword] = useState("");
+
   const links = [
     {
       name: "Home",
@@ -55,10 +57,14 @@ function SubmissionTypes() {
         </Row>
         <br />
         <Row>
-          <Col>
+          <Col lg={3}>
             <div className="d-flex">
               <InputGroup>
-                <FormControl placeholder="Search here" />
+                <FormControl
+                  placeholder="Search here"
+                  value={keyword}
+                  onChange={(e) => setkeyword(e.target.value)}
+                />
               </InputGroup>
             </div>
           </Col>
@@ -88,18 +94,33 @@ function SubmissionTypes() {
                 </tr>
               </thead>
               <tbody>
-                {submissionTypes.map((type) => {
-                  return (
-                    <tr>
-                      <td>{submissionTypes.indexOf(type) + 1}</td>
-                      <td>{type.name}</td>
-                      <td>{type.createdBy}</td>
-                      <td>{type.dateCreated}</td>
-                      <td>{type.visibility}</td>
-                      <td>{type.totalSubmissions}</td>
-                    </tr>
-                  );
-                })}
+                {submissionTypes
+                  .filter((type) => {
+                    if (keyword !== "") {
+                      if (
+                        type.name
+                          .trim()
+                          .toLowerCase()
+                          .includes(keyword.trim().toLowerCase())
+                      ) {
+                        return type;
+                      }
+                    } else {
+                      return type;
+                    }
+                  })
+                  .map((type) => {
+                    return (
+                      <tr>
+                        <td>{submissionTypes.indexOf(type) + 1}</td>
+                        <td>{type.name}</td>
+                        <td>{type.createdBy}</td>
+                        <td>{type.dateCreated}</td>
+                        <td>{type.visibility}</td>
+                        <td>{type.totalSubmissions}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
           </Col>

@@ -13,6 +13,8 @@ import BreadCrumb from "../shared/BreadCrumb";
 function Templates() {
   const navigate = useNavigate();
   const [templates, settemplates] = useState([]);
+  const [keyword, setkeyword] = useState("");
+
   const links = [
     {
       name: "Home",
@@ -76,10 +78,14 @@ function Templates() {
         </Row>
         <br />
         <Row>
-          <Col>
+          <Col lg={3}>
             <div className="d-flex">
               <InputGroup>
-                <FormControl placeholder="Search here" />
+                <FormControl
+                  placeholder="Search here"
+                  value={keyword}
+                  onChange={(e) => setkeyword(e.target.value)}
+                />
               </InputGroup>
             </div>
           </Col>
@@ -108,22 +114,37 @@ function Templates() {
                 </tr>
               </thead>
               <tbody>
-                {templates.map((template) => {
-                  return (
-                    <tr>
-                      <td>{templates.indexOf(template) + 1}</td>
-                      <td>{template.name}</td>
-                      <td>{template.createdBy}</td>
-                      <td>{template.dateCreated}</td>
-                      <td>{template.visibility}</td>
-                      <td>
-                        <a href="#" onClick={() => openFile(template)}>
-                          {template.document}
-                        </a>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {templates
+                  .filter((tmp) => {
+                    if (keyword !== "") {
+                      if (
+                        tmp.name
+                          .trim()
+                          .toLowerCase()
+                          .includes(keyword.trim().toLowerCase())
+                      ) {
+                        return tmp;
+                      }
+                    } else {
+                      return tmp;
+                    }
+                  })
+                  .map((template) => {
+                    return (
+                      <tr>
+                        <td>{templates.indexOf(template) + 1}</td>
+                        <td>{template.name}</td>
+                        <td>{template.createdBy}</td>
+                        <td>{template.dateCreated}</td>
+                        <td>{template.visibility}</td>
+                        <td>
+                          <a href="#" onClick={() => openFile(template)}>
+                            {template.document}
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
           </Col>

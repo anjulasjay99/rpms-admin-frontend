@@ -13,6 +13,7 @@ import BreadCrumb from "../shared/BreadCrumb";
 function MarkingSchemes() {
   const navigate = useNavigate();
   const [markingSchemes, setmarkingSchemes] = useState([]);
+  const [keyword, setkeyword] = useState("");
 
   const links = [
     {
@@ -74,10 +75,14 @@ function MarkingSchemes() {
         </Row>
         <br />
         <Row>
-          <Col>
+          <Col lg={3}>
             <div className="d-flex">
               <InputGroup>
-                <FormControl placeholder="Search here" />
+                <FormControl
+                  placeholder="Search here"
+                  value={keyword}
+                  onChange={(e) => setkeyword(e.target.value)}
+                />
               </InputGroup>
             </div>
           </Col>
@@ -107,22 +112,37 @@ function MarkingSchemes() {
                 </tr>
               </thead>
               <tbody>
-                {markingSchemes.map((scheme) => {
-                  return (
-                    <tr>
-                      <td>{markingSchemes.indexOf(scheme) + 1}</td>
-                      <td>{scheme.name}</td>
-                      <td>{scheme.createdBy}</td>
-                      <td>{scheme.dateCreated}</td>
-                      <td>{scheme.visibility}</td>
-                      <td>
-                        <a href="#" onClick={() => openFile(scheme)}>
-                          {scheme.document}
-                        </a>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {markingSchemes
+                  .filter((scheme) => {
+                    if (keyword !== "") {
+                      if (
+                        scheme.name
+                          .trim()
+                          .toLowerCase()
+                          .includes(keyword.trim().toLowerCase())
+                      ) {
+                        return scheme;
+                      }
+                    } else {
+                      return scheme;
+                    }
+                  })
+                  .map((scheme) => {
+                    return (
+                      <tr>
+                        <td>{markingSchemes.indexOf(scheme) + 1}</td>
+                        <td>{scheme.name}</td>
+                        <td>{scheme.createdBy}</td>
+                        <td>{scheme.dateCreated}</td>
+                        <td>{scheme.visibility}</td>
+                        <td>
+                          <a href="#" onClick={() => openFile(scheme)}>
+                            {scheme.document}
+                          </a>
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
           </Col>

@@ -12,6 +12,7 @@ import BreadCrumb from "../shared/BreadCrumb";
 function Roles() {
   const navigate = useNavigate();
   const [roles, setroles] = useState([]);
+  const [keyword, setkeyword] = useState("");
   const links = [
     {
       name: "Home",
@@ -60,7 +61,11 @@ function Roles() {
             <Col lg={3}>
               <div className="d-flex">
                 <InputGroup>
-                  <FormControl placeholder="Search here" />
+                  <FormControl
+                    placeholder="Search here"
+                    value={keyword}
+                    onChange={(e) => setkeyword(e.target.value)}
+                  />
                 </InputGroup>
               </div>
             </Col>
@@ -78,16 +83,31 @@ function Roles() {
                   </tr>
                 </thead>
                 <tbody>
-                  {roles.map((role) => {
-                    return (
-                      <tr>
-                        <td>{roles.indexOf(role) + 1}</td>
-                        <td>{role.role}</td>
-                        <td>{role.permissionLevel}</td>
-                        <td>{role.totalUsers}</td>
-                      </tr>
-                    );
-                  })}
+                  {roles
+                    .filter((role) => {
+                      if (keyword !== "") {
+                        if (
+                          role.role
+                            .trim()
+                            .toLowerCase()
+                            .includes(keyword.trim().toLowerCase())
+                        ) {
+                          return role;
+                        }
+                      } else {
+                        return role;
+                      }
+                    })
+                    .map((role) => {
+                      return (
+                        <tr>
+                          <td>{roles.indexOf(role) + 1}</td>
+                          <td>{role.role}</td>
+                          <td>{role.permissionLevel}</td>
+                          <td>{role.totalUsers}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </Table>
             </Col>

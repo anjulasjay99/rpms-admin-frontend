@@ -33,6 +33,11 @@ function CreateSubmissionType({ user }) {
     },
   ];
 
+  //go back to previous page
+  const onCancel = () => {
+    navigate(-1);
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
 
@@ -47,7 +52,7 @@ function CreateSubmissionType({ user }) {
     };
 
     //call endpoint and save submission type in the db
-    fetch(`http://localhost:8070/submissiontypes/${user.username}`, {
+    fetch(`http://localhost:8070/submissiontypes/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
@@ -181,6 +186,7 @@ function CreateSubmissionType({ user }) {
                 <Button
                   variant="secondary"
                   style={{ marginRight: "5px", float: "right" }}
+                  onClick={onCancel}
                 >
                   Cancel
                 </Button>

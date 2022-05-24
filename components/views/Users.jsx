@@ -22,6 +22,7 @@ function Users() {
   const [stdLoaded, setstdLoaded] = useState(false);
   const [stfLoaded, setstfLoaded] = useState(false);
   const [adminLoaded, setadminLoaded] = useState(false);
+  const [keyword, setkeyword] = useState("");
 
   const links = [
     {
@@ -156,7 +157,11 @@ function Users() {
           <Col lg={3}>
             <div className="d-flex">
               <InputGroup>
-                <FormControl placeholder="Search here" />
+                <FormControl
+                  placeholder="Search here"
+                  value={keyword}
+                  onChange={(e) => setkeyword(e.target.value)}
+                />
               </InputGroup>
             </div>
           </Col>
@@ -177,34 +182,50 @@ function Users() {
                 </tr>
               </thead>
               <tbody>
-                {getUsers().map((user, index) => {
-                  return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.email}</td>
-                      <td>{user.telNo}</td>
-                      <td>{user.role}</td>
-                      <td>{user.dateCreated}</td>
-                      <td>
-                        <IconsDiv>
-                          <FaUserEdit
-                            title="Edit User"
-                            style={{ marginRight: "10px", cursor: "pointer" }}
-                            onClick={() => editUser(user)}
-                          />
+                {getUsers()
+                  .filter((user) => {
+                    if (keyword !== "") {
+                      let name = user.firstName + " " + user.lastName;
+                      if (
+                        name
+                          .trim()
+                          .toLowerCase()
+                          .includes(keyword.trim().toLowerCase())
+                      ) {
+                        return user;
+                      }
+                    } else {
+                      return user;
+                    }
+                  })
+                  .map((user, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
+                        <td>{user.email}</td>
+                        <td>{user.telNo}</td>
+                        <td>{user.role}</td>
+                        <td>{user.dateCreated}</td>
+                        <td>
+                          <IconsDiv>
+                            <FaUserEdit
+                              title="Edit User"
+                              style={{ marginRight: "10px", cursor: "pointer" }}
+                              onClick={() => editUser(user)}
+                            />
 
-                          <MdDeleteForever
-                            title="Delete User"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => deleteUser(user)}
-                          />
-                        </IconsDiv>
-                      </td>
-                    </tr>
-                  );
-                })}
+                            <MdDeleteForever
+                              title="Delete User"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => deleteUser(user)}
+                            />
+                          </IconsDiv>
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
           </Col>
