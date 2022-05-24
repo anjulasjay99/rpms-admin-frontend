@@ -18,6 +18,7 @@ import AssignPanels from "./components/views/AssignPanels";
 import Login from "./components/views/Login";
 import bg from "./assets/images/loginBgnew.jpg";
 import Users from "./components/views/Users";
+import jsonwebtoken from "jsonwebtoken";
 
 function App() {
   const [user, setuser] = useState({});
@@ -32,7 +33,10 @@ function App() {
   };
 
   useEffect(() => {
-    return () => {};
+    const user = jsonwebtoken.decode(sessionStorage.getItem("token"));
+    if (user !== "" || user !== undefined) {
+      setuser(user);
+    }
   }, []);
 
   return (
