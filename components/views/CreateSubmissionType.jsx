@@ -52,7 +52,7 @@ function CreateSubmissionType({ user }) {
     };
 
     //call endpoint and save submission type in the db
-    fetch(`http://localhost:8070/submissiontypes/${user.username}`, {
+    fetch(`http://localhost:8070/submissiontypes/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),

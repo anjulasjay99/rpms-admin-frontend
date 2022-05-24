@@ -52,6 +52,8 @@ function AssignPanels() {
   const [topics, settopics] = useState([]);
   const [panelToAssign, setpanelToAssign] = useState("dharshana.r@sliit.lk");
   const [selectedGroup, setselectedGroup] = useState("");
+  const [keyword1, setkeyword1] = useState("");
+  const [keyword2, setkeyword2] = useState("");
 
   const links = [
     {
@@ -191,45 +193,66 @@ function AssignPanels() {
           <Row>
             <Col>
               <InputGroup>
-                <FormControl placeholder="Search here" />
+                <FormControl
+                  placeholder="Search here"
+                  value={keyword2}
+                  onChange={(e) => setkeyword2(e.target.value)}
+                />
               </InputGroup>
             </Col>
           </Row>
           <div style={modalContentDiv}>
-            {panels.map((panel, index) => {
-              return (
-                <Row>
-                  <Col>
-                    <div style={panelRowStyle}>
-                      <div>
-                        <label style={{ fontWeight: 600 }}>{panel.name}</label>
-                        <br />
-                        <label style={{ fontWeight: 300, fontSize: "14px" }}>
-                          {panel.email}
-                        </label>
+            {panels
+              .filter((panel) => {
+                if (keyword2 !== "") {
+                  if (
+                    panel.name
+                      .trim()
+                      .toLowerCase()
+                      .includes(keyword2.trim().toLowerCase())
+                  ) {
+                    return panel;
+                  }
+                } else {
+                  return panel;
+                }
+              })
+              .map((panel, index) => {
+                return (
+                  <Row>
+                    <Col>
+                      <div style={panelRowStyle}>
+                        <div>
+                          <label style={{ fontWeight: 600 }}>
+                            {panel.name}
+                          </label>
+                          <br />
+                          <label style={{ fontWeight: 300, fontSize: "14px" }}>
+                            {panel.email}
+                          </label>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginRight: "5px",
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            name="panel"
+                            value={panel.email}
+                            onChange={(e) => setpanelToAssign(e.target.value)}
+                            checked={panelToAssign === panel.email}
+                          />
+                        </div>
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          marginRight: "5px",
-                        }}
-                      >
-                        <input
-                          type="radio"
-                          name="panel"
-                          value={panel.email}
-                          onChange={(e) => setpanelToAssign(e.target.value)}
-                          checked={panelToAssign === panel.email}
-                        />
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              );
-            })}
+                    </Col>
+                  </Row>
+                );
+              })}
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -253,7 +276,11 @@ function AssignPanels() {
           <Col lg={6}>
             <div className="d-flex">
               <InputGroup>
-                <FormControl placeholder="Search here" />
+                <FormControl
+                  placeholder="Search here"
+                  value={keyword1}
+                  onChange={(e) => setkeyword1(e.target.value)}
+                />
               </InputGroup>
             </div>
           </Col>
@@ -273,34 +300,49 @@ function AssignPanels() {
                 </tr>
               </thead>
               <tbody>
-                {studentGroups.map((group, index) => {
-                  return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{group.groupID}</td>
-                      <td>{group.Leadermail}</td>
-                      <td>
-                        {group.Leadermail}
-                        <br />
-                        {group.S2mail}
-                        <br />
-                        {group.S3mail}
-                        <br />
-                        {group.S4mail}
-                      </td>
-                      <td>{getTopic(group.groupID)}</td>
-                      <td>{getAssignedPanel(group.groupID)}</td>
-                      <td>
-                        <Button
-                          variant="outline-primary"
-                          onClick={() => handleShow(group.groupID)}
-                        >
-                          Assign Panel
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {studentGroups
+                  .filter((group) => {
+                    if (keyword1 !== "") {
+                      if (
+                        group.groupID
+                          .trim()
+                          .toLowerCase()
+                          .includes(keyword1.trim().toLowerCase())
+                      ) {
+                        return group;
+                      }
+                    } else {
+                      return group;
+                    }
+                  })
+                  .map((group, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{group.groupID}</td>
+                        <td>{group.Leadermail}</td>
+                        <td>
+                          {group.Leadermail}
+                          <br />
+                          {group.S2mail}
+                          <br />
+                          {group.S3mail}
+                          <br />
+                          {group.S4mail}
+                        </td>
+                        <td>{getTopic(group.groupID)}</td>
+                        <td>{getAssignedPanel(group.groupID)}</td>
+                        <td>
+                          <Button
+                            variant="outline-primary"
+                            onClick={() => handleShow(group.groupID)}
+                          >
+                            Assign Panel
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
           </Col>
