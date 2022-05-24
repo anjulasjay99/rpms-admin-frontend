@@ -75,7 +75,7 @@ function MarkingSchemes() {
         </Row>
         <br />
         <Row>
-          <Col>
+          <Col lg={3}>
             <div className="d-flex">
               <InputGroup>
                 <FormControl

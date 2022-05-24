@@ -273,7 +273,7 @@ function AssignPanels() {
         </Row>
         <br />
         <Row>
-          <Col lg={6}>
+          <Col lg={3}>
             <div className="d-flex">
               <InputGroup>
                 <FormControl
