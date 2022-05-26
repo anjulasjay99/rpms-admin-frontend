@@ -14,6 +14,7 @@ function SubmissionTypes() {
   const navigate = useNavigate();
   const [submissionTypes, setsubmissionTypes] = useState([]);
   const [keyword, setkeyword] = useState("");
+  const [templates, settemplates] = useState([]);
 
   const links = [
     {
@@ -25,6 +26,44 @@ function SubmissionTypes() {
       path: "/submission-types",
     },
   ];
+
+  //fetch all templates
+  const fetchTemplates = async () => {
+    await fetch("http://localhost:8070/templates")
+      .then((res) => res.json())
+      .then((res) => settemplates(res))
+      .catch((err) => console.log(err));
+  };
+
+  //get template name
+  const getTemplate = (id) => {
+    let template = {
+      name: "No Template",
+    };
+    templates.forEach((tmp) => {
+      if (tmp._id === id) {
+        template = tmp;
+      }
+    });
+    return template;
+  };
+
+  //open template
+  const openFile = (doc) => {
+    fetch(`http://localhost:8070/templates/files/download/${doc.fileId}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", doc.document);
+        link.setAttribute("target", "_blank");
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -43,6 +82,7 @@ function SubmissionTypes() {
     }
 
     fetchData();
+    fetchTemplates();
   }, []);
 
   return (
@@ -89,8 +129,8 @@ function SubmissionTypes() {
                   <th>Name</th>
                   <th>Created By</th>
                   <th>Date Created</th>
+                  <th>Template</th>
                   <th>Visibility</th>
-                  <th>Total Submissions</th>
                 </tr>
               </thead>
               <tbody>
@@ -116,8 +156,17 @@ function SubmissionTypes() {
                         <td>{type.name}</td>
                         <td>{type.createdBy}</td>
                         <td>{type.dateCreated}</td>
+                        <td>
+                          <a
+                            href="#"
+                            onClick={() =>
+                              openFile(getTemplate(type.templateId))
+                            }
+                          >
+                            {getTemplate(type.templateId).document}
+                          </a>
+                        </td>
                         <td>{type.visibility}</td>
-                        <td>{type.totalSubmissions}</td>
                       </tr>
                     );
                   })}
