@@ -17,6 +17,11 @@ function CreateSubmissionType({ user }) {
   const [isEditable, setisEditable] = useState(true);
   const [isMultipleSubmissions, setisMultipleSubmissions] = useState(true);
   const [visibility, setvisibility] = useState("Public");
+  const [templates, settemplates] = useState([
+    { _id: "123", name: "temp1" },
+    { _id: "456", name: "temp2" },
+  ]);
+  const [selectedTemplate, setselectedTemplate] = useState("");
 
   const links = [
     {
@@ -38,14 +43,19 @@ function CreateSubmissionType({ user }) {
     navigate(-1);
   };
 
+  const selectTemplate = (val) => {
+    setselectedTemplate(val);
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
+    console.log(selectedTemplate);
 
     //create submission type object
     const submissionType = {
       name,
       description,
-      isFileUpload,
+      templateId: selectedTemplate,
       isEditable,
       isMultipleSubmissions,
       visibility,
@@ -69,11 +79,25 @@ function CreateSubmissionType({ user }) {
       });
   };
 
+  //fecth all templates
+  const fetchTemplates = async () => {
+    await fetch("http://localhost:8070/templates")
+      .then((res) => res.json())
+      .then((res) => {
+        settemplates(res);
+        if (res.length > 0) setselectedTemplate(res[0]._id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
       navigate("/login");
     }
+    fetchTemplates();
   }, []);
 
   return (
@@ -116,24 +140,15 @@ function CreateSubmissionType({ user }) {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label>Type</Form.Label>
-                  <br />
-                  <Form.Check
-                    inline
-                    label="File"
-                    name="type"
-                    type="radio"
-                    checked={isFileUpload}
-                    onChange={() => setisFileUpload(true)}
-                  />
-                  <Form.Check
-                    inline
-                    label="Text Only"
-                    name="type"
-                    type="radio"
-                    checked={!isFileUpload}
-                    onChange={() => setisFileUpload(false)}
-                  />
+                  <Form.Label>Template</Form.Label>
+                  <Form.Select
+                    value={selectedTemplate}
+                    onChange={(e) => selectTemplate(e.target.value)}
+                  >
+                    {templates.map((tmp) => {
+                      return <option value={tmp._id}>{tmp.name}</option>;
+                    })}
+                  </Form.Select>
                 </Form.Group>
               </Col>
               <Col>
