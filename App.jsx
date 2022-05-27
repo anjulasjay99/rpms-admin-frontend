@@ -36,10 +36,10 @@ function App() {
   };
 
   useEffect(() => {
-    const user = jsonwebtoken.decode(sessionStorage.getItem("token"));
-    if (user !== "" || user !== undefined) {
+    /* const user = jsonwebtoken.decode(sessionStorage.getItem("token"));
+    if (user !== "" || user !== undefined || user !== null) {
       setuser(user);
-    }
+    } */
   }, []);
 
   return (
