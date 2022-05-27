@@ -69,14 +69,17 @@ function CreateMarkingScheme({ user }) {
     let document = "";
     let fileId = "";
 
-    await fetch(`http://localhost:8070/markingschemes/files/upload/`, {
-      method: "POST",
-      headers: {
-        "x-access-token": sessionStorage.getItem("token"),
-        Accept: "application/json",
-      },
-      body: data,
-    })
+    await fetch(
+      `https://rpms-backend.herokuapp.com/markingschemes/files/upload/`,
+      {
+        method: "POST",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+          Accept: "application/json",
+        },
+        body: data,
+      }
+    )
       .then((response) => response.json())
       .then((response) => {
         document = response.document;
@@ -95,7 +98,7 @@ function CreateMarkingScheme({ user }) {
       fileId,
     };
 
-    fetch(`http://localhost:8070/markingschemes/${user.email}`, {
+    fetch(`https://rpms-backend.herokuapp.com/markingschemes/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),

@@ -92,7 +92,7 @@ function AssignPanels() {
 
   //fetch all registered groups
   const fetchGroups = async () => {
-    await fetch("http://localhost:8070/groups/")
+    await fetch("https://rpms-backend.herokuapp.com/groups/")
       .then((response) => response.json())
       .then((response) => {
         setstudentGroups(response);
@@ -104,7 +104,7 @@ function AssignPanels() {
 
   //fetch registered topics
   const fetchTopics = async () => {
-    await fetch("http://localhost:8070/topicsubs/")
+    await fetch("https://rpms-backend.herokuapp.com/topicsubs/")
       .then((response) => response.json())
       .then((response) => {
         settopics(response);
@@ -116,7 +116,7 @@ function AssignPanels() {
 
   //fetch all staff members
   const fetchStaffMembers = async () => {
-    await fetch("http://localhost:8070/staff/getAll")
+    await fetch("https://rpms-backend.herokuapp.com/staff/getAll")
       .then((response) => response.json())
       .then((response) => {
         setpanels(response);
@@ -129,7 +129,7 @@ function AssignPanels() {
 
   //fetch all assigned panels
   const fetchAssignedPanels = async () => {
-    await fetch("http://localhost:8070/assignedpanels/")
+    await fetch("https://rpms-backend.herokuapp.com/assignedpanels/")
       .then((response) => response.json())
       .then((response) => {
         setassignedPanels(response);
@@ -174,7 +174,7 @@ function AssignPanels() {
 
     //check whether a panel is already assigned to the selected group or not
     if (getAssignedPanel(data.groupId) === "Unassigned") {
-      fetch("http://localhost:8070/assignedpanels", {
+      fetch("https://rpms-backend.herokuapp.com/assignedpanels", {
         method: "POST",
         headers: {
           "x-access-token": sessionStorage.getItem("token"),
@@ -190,7 +190,7 @@ function AssignPanels() {
           alert(err);
         });
     } else {
-      fetch("http://localhost:8070/assignedpanels", {
+      fetch("https://rpms-backend.herokuapp.com/assignedpanels", {
         method: "PUT",
         headers: {
           "x-access-token": sessionStorage.getItem("token"),

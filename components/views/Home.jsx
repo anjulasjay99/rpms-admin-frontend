@@ -29,7 +29,7 @@ function Home() {
   const [lognActivities, setlognActivities] = useState([]);
 
   const fecthLoginActivities = async () => {
-    await fetch("http://localhost:8070/loginactivities", {
+    await fetch("https://rpms-backend.herokuapp.com/loginactivities", {
       method: "GET",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),

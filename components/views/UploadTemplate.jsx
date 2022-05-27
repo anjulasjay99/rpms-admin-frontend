@@ -49,7 +49,7 @@ function UploadTemplate({ user }) {
     let document = "";
     let fileId = "";
 
-    await fetch(`http://localhost:8070/templates/files/upload/`, {
+    await fetch(`https://rpms-backend.herokuapp.com/templates/files/upload/`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
@@ -75,7 +75,7 @@ function UploadTemplate({ user }) {
       visibility,
     };
 
-    fetch(`http://localhost:8070/templates/${user.email}`, {
+    fetch(`https://rpms-backend.herokuapp.com/templates/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),

@@ -28,7 +28,7 @@ function MarkingSchemes() {
 
   const openFile = (scheme) => {
     fetch(
-      `http://localhost:8070/markingschemes/files/download/${scheme.fileId}`
+      `https://rpms-backend.herokuapp.com/markingschemes/files/download/${scheme.fileId}`
     )
       .then((response) => response.blob())
       .then((blob) => {
@@ -50,7 +50,7 @@ function MarkingSchemes() {
       navigate("/login");
     }
     async function fetchData() {
-      await fetch("http://localhost:8070/markingschemes/")
+      await fetch("https://rpms-backend.herokuapp.com/markingschemes/")
         .then((response) => response.json())
         .then((response) => {
           setmarkingSchemes(response);

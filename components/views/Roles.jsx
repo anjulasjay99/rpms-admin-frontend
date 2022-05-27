@@ -25,7 +25,7 @@ function Roles() {
   ];
 
   const fetchRoles = async () => {
-    await fetch("http://localhost:8070/roles", {
+    await fetch("https://rpms-backend.herokuapp.com/roles", {
       method: "GET",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
