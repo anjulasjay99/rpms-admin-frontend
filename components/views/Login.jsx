@@ -57,7 +57,7 @@ function Login({ setUser, setLogin }) {
   const login = (e) => {
     e.preventDefault();
     setloading(true);
-    fetch("http://localhost:8070/admins/login", {
+    fetch("https://rpms-backend.herokuapp.com/admins/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

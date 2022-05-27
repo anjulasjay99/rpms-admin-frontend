@@ -61,14 +61,17 @@ function EditUser() {
       role,
       dateCreated: location.state.user.dateCreated,
     };
-    fetch(`http://localhost:8070/admins/${location.state.user._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": sessionStorage.getItem("token"),
-      },
-      body: JSON.stringify(user),
-    })
+    fetch(
+      `https://rpms-backend.herokuapp.com/admins/${location.state.user._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": sessionStorage.getItem("token"),
+        },
+        body: JSON.stringify(user),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         alert("Success!");
@@ -88,13 +91,16 @@ function EditUser() {
       field: location.state.user.field,
       password: password,
     };
-    fetch(`http://localhost:8070/staff/update/${location.state.user._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
+    fetch(
+      `https://rpms-backend.herokuapp.com/staff/update/${location.state.user._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         alert("Success!");
@@ -114,13 +120,16 @@ function EditUser() {
       field: location.state.user.field,
       password: password,
     };
-    fetch(`http://localhost:8070/students/${location.state.user._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
+    fetch(
+      `https://rpms-backend.herokuapp.com/students/${location.state.user._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         alert("Success!");

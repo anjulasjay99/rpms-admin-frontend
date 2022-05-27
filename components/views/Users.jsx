@@ -37,7 +37,7 @@ function Users() {
 
   //fetch all admin users
   const fetchAdminUsers = async () => {
-    await fetch("http://localhost:8070/admins", {
+    await fetch("https://rpms-backend.herokuapp.com/admins", {
       method: "GET",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
@@ -54,7 +54,7 @@ function Users() {
 
   //fetch all staff members
   const fetchStaffMembers = async () => {
-    await fetch("http://localhost:8070/staff/getAll")
+    await fetch("https://rpms-backend.herokuapp.com/staff/getAll")
       .then((res) => res.json())
       .then((res) => {
         setstaff(res);
@@ -66,7 +66,7 @@ function Users() {
 
   //fetch all students
   const fetchStudents = async () => {
-    await fetch("http://localhost:8070/students")
+    await fetch("https://rpms-backend.herokuapp.com/students")
       .then((res) => res.json())
       .then((res) => {
         setstudents(res);
@@ -89,7 +89,7 @@ function Users() {
   const deleteUser = (user) => {
     if (confirm("Are you sure you want to delete user " + user.firstName)) {
       if (user.role.toLocaleLowerCase() === "admin") {
-        fetch(`http://localhost:8070/admins/${user._id}`, {
+        fetch(`https://rpms-backend.herokuapp.com/admins/${user._id}`, {
           method: "DELETE",
           headers: {
             "x-access-token": sessionStorage.getItem("token"),
@@ -104,7 +104,7 @@ function Users() {
           })
           .catch((err) => alert(err));
       } else if (user.role.toLocaleLowerCase() === "student") {
-        fetch(`http://localhost:8070/students/${user._id}`, {
+        fetch(`https://rpms-backend.herokuapp.com/students/${user._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -116,7 +116,7 @@ function Users() {
           })
           .catch((err) => alert(err));
       } else {
-        fetch(`http://localhost:8070/staff/delete/${user._id}`, {
+        fetch(`https://rpms-backend.herokuapp.com/staff/delete/${user._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

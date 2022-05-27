@@ -62,7 +62,7 @@ function CreateSubmissionType({ user }) {
     };
 
     //call endpoint and save submission type in the db
-    fetch(`http://localhost:8070/submissiontypes/${user.email}`, {
+    fetch(`https://rpms-backend.herokuapp.com/submissiontypes/${user.email}`, {
       method: "POST",
       headers: {
         "x-access-token": sessionStorage.getItem("token"),
@@ -81,7 +81,7 @@ function CreateSubmissionType({ user }) {
 
   //fecth all templates
   const fetchTemplates = async () => {
-    await fetch("http://localhost:8070/templates")
+    await fetch("https://rpms-backend.herokuapp.com/templates")
       .then((res) => res.json())
       .then((res) => {
         settemplates(res);

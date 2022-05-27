@@ -27,7 +27,9 @@ function Templates() {
   ];
 
   const openFile = (doc) => {
-    fetch(`http://localhost:8070/templates/files/download/${doc.fileId}`)
+    fetch(
+      `https://rpms-backend.herokuapp.com/templates/files/download/${doc.fileId}`
+    )
       .then((response) => response.blob())
       .then((blob) => {
         const link = document.createElement("a");
@@ -49,7 +51,7 @@ function Templates() {
     }
     //fetch uploaded templates
     async function fetchData() {
-      await fetch("http://localhost:8070/templates/", {
+      await fetch("https://rpms-backend.herokuapp.com/templates/", {
         method: "GET",
         headers: {
           "x-access-token": sessionStorage.getItem("token"),

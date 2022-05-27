@@ -21,7 +21,10 @@ import Users from "./components/views/Users";
 import jsonwebtoken from "jsonwebtoken";
 
 function App() {
-  const [user, setuser] = useState({});
+  const [user, setuser] = useState({
+    email: "",
+    password: "",
+  });
   const [isLogin, setisLogin] = useState(false);
 
   const setUser = (loggedUser) => {

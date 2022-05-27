@@ -29,7 +29,7 @@ function SubmissionTypes() {
 
   //fetch all templates
   const fetchTemplates = async () => {
-    await fetch("http://localhost:8070/templates")
+    await fetch("https://rpms-backend.herokuapp.com/templates")
       .then((res) => res.json())
       .then((res) => settemplates(res))
       .catch((err) => console.log(err));
@@ -50,7 +50,9 @@ function SubmissionTypes() {
 
   //open template
   const openFile = (doc) => {
-    fetch(`http://localhost:8070/templates/files/download/${doc.fileId}`)
+    fetch(
+      `https://rpms-backend.herokuapp.com/templates/files/download/${doc.fileId}`
+    )
       .then((response) => response.blob())
       .then((blob) => {
         const link = document.createElement("a");
@@ -71,7 +73,7 @@ function SubmissionTypes() {
       navigate("/login");
     }
     async function fetchData() {
-      await fetch("http://localhost:8070/submissiontypes/")
+      await fetch("https://rpms-backend.herokuapp.com/submissiontypes/")
         .then((response) => response.json())
         .then((response) => {
           setsubmissionTypes(response);
