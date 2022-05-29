@@ -17,6 +17,7 @@ import bg from "../../assets/images/loginBgnew.jpg";
 import BreadCrumb from "../shared/BreadCrumb";
 import { NavCard } from "../../assets/css/NavCard.styled";
 import { ParentDiv } from "../../assets/css/ParentDiv.styled";
+import Pagination from "react-bootstrap/Pagination";
 
 function Home() {
   const navigate = useNavigate();
@@ -27,6 +28,46 @@ function Home() {
     },
   ];
   const [lognActivities, setlognActivities] = useState([]);
+  const [pagination, setpagination] = useState([]);
+  const [currentPage, setcurrentPage] = useState({
+    firstIndex: 0,
+    lastIndex: 1,
+  });
+
+  const setPage = (index) => {
+    setcurrentPage(pagination[index]);
+  };
+
+  const createPagination = (arr) => {
+    let pages = [];
+
+    if (arr.length > 0) {
+      const fullPages = Math.floor(arr.length / 5);
+      const remainder = arr.length % 5;
+
+      if (fullPages === 0) {
+        pages.push({ pageIndex: 0, firstIndex: 0, lastIndex: arr.length - 1 });
+      } else {
+        for (let i = 0; i < fullPages; i++) {
+          pages.push({ pageIndex: i, firstIndex: i * 5, lastIndex: i * 5 + 4 });
+        }
+
+        if (remainder > 0) {
+          pages.push({
+            pageIndex: fullPages,
+            firstIndex: fullPages * 5,
+            lastIndex: fullPages * 5 + (remainder - 1),
+          });
+        }
+      }
+    } else {
+      pages.push({ firstIndex: 0, lastIndex: 1 });
+    }
+
+    setcurrentPage(pages[0]);
+
+    setpagination(pages);
+  };
 
   const fecthLoginActivities = async () => {
     await fetch("https://rpms-backend.herokuapp.com/loginactivities", {
@@ -36,7 +77,10 @@ function Home() {
       },
     })
       .then((res) => res.json())
-      .then((res) => [setlognActivities(res)])
+      .then((res) => {
+        setlognActivities(res);
+        createPagination(res);
+      })
       .catch((err) => {
         alert(err);
       });
@@ -173,18 +217,60 @@ function Home() {
                 </tr>
               </thead>
               <tbody>
-                {lognActivities.map((data, index) => {
-                  return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{data.name}</td>
-                      <td>{data.email}</td>
-                      <td>{data.dateAndTime}</td>
-                    </tr>
-                  );
-                })}
+                {lognActivities
+                  .reverse()
+                  .slice(currentPage.firstIndex, currentPage.lastIndex + 1)
+                  .map((data, index) => {
+                    return (
+                      <tr>
+                        <td>{currentPage.firstIndex + index + 1}</td>
+                        <td>{data.name}</td>
+                        <td>{data.email}</td>
+                        <td>{new Date(data.dateAndTime).toLocaleString()}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </Table>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Container
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Pagination>
+                <Pagination.First onClick={() => setPage(0)} />
+                <Pagination.Prev
+                  onClick={() => {
+                    if (currentPage.pageIndex > 0) {
+                      setPage(currentPage.pageIndex - 1);
+                    }
+                  }}
+                />
+                {pagination.map((p, index) => {
+                  return (
+                    <Pagination.Item onClick={() => setPage(index)}>
+                      {index + 1}
+                    </Pagination.Item>
+                  );
+                })}
+                <Pagination.Next
+                  onClick={() => {
+                    if (currentPage.pageIndex < pagination.length - 1) {
+                      setPage(currentPage.pageIndex + 1);
+                    }
+                  }}
+                />
+                <Pagination.Last
+                  onClick={() => setPage(pagination.length - 1)}
+                />
+              </Pagination>
+            </Container>
           </Col>
         </Row>
       </Container>
