@@ -133,7 +133,7 @@ function MarkingSchemes() {
                         <td>{markingSchemes.indexOf(scheme) + 1}</td>
                         <td>{scheme.name}</td>
                         <td>{scheme.createdBy}</td>
-                        <td>{scheme.dateCreated}</td>
+                        <td>{new Date(scheme.dateCreated).toLocaleString()}</td>
                         <td>{scheme.visibility}</td>
                         <td>
                           <a href="#" onClick={() => openFile(scheme)}>

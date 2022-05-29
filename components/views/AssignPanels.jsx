@@ -12,6 +12,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import Pagination from "react-bootstrap/Pagination";
 
 //styles
 const panelRowStyle = {
@@ -57,6 +58,7 @@ function AssignPanels() {
   const [keyword1, setkeyword1] = useState("");
   const [keyword2, setkeyword2] = useState("");
   const [showAll, setshowAll] = useState(false);
+  const [pagination, setpagination] = useState([]);
 
   const links = [
     {
@@ -90,12 +92,39 @@ function AssignPanels() {
     setShow(true);
   };
 
+  const createPagination = (arr) => {
+    let pages = [];
+    const fullPages = Math.floor(arr.length / 5);
+    const remainder = arr.length % 5;
+
+    if (fullPages === 0) {
+      pages.push({ page: 1, firstIndex: 0, lastIndex: arr.length - 1 });
+    } else {
+      for (let i = 0; i < fullPages; i++) {
+        pages.push({ page: i + 1, firstIndex: i * 5, lastIndex: i * 5 + 4 });
+      }
+
+      if (remainder > 0) {
+        pages.push({
+          page: fullPages + 1,
+          firstIndex: fullPages * 5,
+          lastIndex: fullPages * 5 + (remainder - 1),
+        });
+      }
+    }
+
+    console.log(pages);
+
+    setpagination(pages);
+  };
+
   //fetch all registered groups
   const fetchGroups = async () => {
     await fetch("https://rpms-backend.herokuapp.com/groups/")
       .then((response) => response.json())
       .then((response) => {
         setstudentGroups(response);
+        createPagination(response);
       })
       .catch((err) => {
         console.log(err);
@@ -407,6 +436,24 @@ function AssignPanels() {
                   })}
               </tbody>
             </Table>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Container
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Pagination>
+                <Pagination.First />
+                <Pagination.Prev />
+                <Pagination.Next />
+                <Pagination.Last />
+              </Pagination>
+            </Container>
           </Col>
         </Row>
       </div>
