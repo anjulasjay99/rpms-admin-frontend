@@ -157,7 +157,7 @@ function SubmissionTypes() {
                         <td>{submissionTypes.indexOf(type) + 1}</td>
                         <td>{type.name}</td>
                         <td>{type.createdBy}</td>
-                        <td>{type.dateCreated}</td>
+                        <td>{new Date(type.dateCreated).toLocaleString()}</td>
                         <td>
                           <a
                             href="#"

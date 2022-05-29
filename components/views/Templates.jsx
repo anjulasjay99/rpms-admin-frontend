@@ -137,7 +137,9 @@ function Templates() {
                         <td>{templates.indexOf(template) + 1}</td>
                         <td>{template.name}</td>
                         <td>{template.createdBy}</td>
-                        <td>{template.dateCreated}</td>
+                        <td>
+                          {new Date(template.dateCreated).toLocaleString()}
+                        </td>
                         <td>{template.visibility}</td>
                         <td>
                           <a href="#" onClick={() => openFile(template)}>
