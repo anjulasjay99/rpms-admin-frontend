@@ -23,7 +23,48 @@ function Roles() {
       path: "/roles",
     },
   ];
+  const [adminCount, setadminCount] = useState(0);
+  const [studentCount, setstudentCount] = useState(0);
+  const [staffCount, setstaffCount] = useState(0);
 
+  //get admin count
+  const getTotalAdminUsers = async () => {
+    await fetch("https://rpms-backend.herokuapp.com/admins/totalusers")
+      .then((res) => res.json())
+      .then((res) => {
+        setadminCount(res.total);
+      });
+  };
+
+  //get student count
+  const getTotalStudentUsers = async () => {
+    await fetch("https://rpms-backend.herokuapp.com/students/totalusers")
+      .then((res) => res.json())
+      .then((res) => {
+        setstudentCount(res.total);
+      });
+  };
+
+  //get staff count
+  const getTotalStaffUsers = async () => {
+    await fetch("https://rpms-backend.herokuapp.com/staff/totalusers")
+      .then((res) => res.json())
+      .then((res) => {
+        setstaffCount(res.total);
+      });
+  };
+
+  const getUserCountForRole = (role) => {
+    if (role.trim().toLowerCase() === "admin") {
+      return adminCount;
+    } else if (role.trim().toLowerCase() === "student") {
+      return studentCount;
+    } else {
+      return staffCount;
+    }
+  };
+
+  //fetch user roles
   const fetchRoles = async () => {
     await fetch("https://rpms-backend.herokuapp.com/roles", {
       method: "GET",
@@ -43,6 +84,9 @@ function Roles() {
       navigate("/login");
     }
     fetchRoles();
+    getTotalAdminUsers();
+    getTotalStudentUsers();
+    getTotalStaffUsers();
   }, []);
 
   return (
@@ -104,7 +148,7 @@ function Roles() {
                           <td>{roles.indexOf(role) + 1}</td>
                           <td>{role.role}</td>
                           <td>{role.permissionLevel}</td>
-                          <td>{role.totalUsers}</td>
+                          <td>{getUserCountForRole(role.role)}</td>
                         </tr>
                       );
                     })}

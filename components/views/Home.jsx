@@ -78,7 +78,7 @@ function Home() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setlognActivities(res);
+        setlognActivities([...res].reverse());
         createPagination(res);
       })
       .catch((err) => {
@@ -218,7 +218,6 @@ function Home() {
               </thead>
               <tbody>
                 {lognActivities
-                  .reverse()
                   .slice(currentPage.firstIndex, currentPage.lastIndex + 1)
                   .map((data, index) => {
                     return (
