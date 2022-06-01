@@ -9,6 +9,8 @@ import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import { MdDeleteForever } from "react-icons/md";
+import { IconsDiv } from "../../assets/css/IconsDiv.styeld";
 
 function Templates() {
   const navigate = useNavigate();
@@ -44,26 +46,47 @@ function Templates() {
       });
   };
 
-  useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    }
-    //fetch uploaded templates
-    async function fetchData() {
-      await fetch("https://rpms-backend.herokuapp.com/templates/", {
-        method: "GET",
+  //delete template
+  const deleteTemplate = (template) => {
+    if (
+      confirm(`Are you sure you want to delete the template '${template.name}'`)
+    ) {
+      fetch(`https://rpms-backend.herokuapp.com/templates/${template.fileId}`, {
+        method: "DELETE",
         headers: {
           "x-access-token": sessionStorage.getItem("token"),
         },
       })
-        .then((response) => response.json())
-        .then((response) => {
-          settemplates(response);
+        .then((res) => res.json())
+        .then((res) => {
+          fetchData();
+          alert("Success!");
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => alert(err));
+    }
+  };
+
+  //fetch uploaded templates
+  async function fetchData() {
+    await fetch("https://rpms-backend.herokuapp.com/templates/", {
+      method: "GET",
+      headers: {
+        "x-access-token": sessionStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        settemplates(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
     }
 
     fetchData();
@@ -113,6 +136,7 @@ function Templates() {
                   <th>Date Created</th>
                   <th>Visibility</th>
                   <th>File</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -145,6 +169,15 @@ function Templates() {
                           <a href="#" onClick={() => openFile(template)}>
                             {template.document}
                           </a>
+                        </td>
+                        <td>
+                          <IconsDiv>
+                            <MdDeleteForever
+                              title="Delete template"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => deleteTemplate(template)}
+                            />
+                          </IconsDiv>
                         </td>
                       </tr>
                     );
