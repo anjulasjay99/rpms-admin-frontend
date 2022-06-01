@@ -168,7 +168,7 @@ function MarkingSchemes() {
                         <td>
                           <IconsDiv>
                             <MdDeleteForever
-                              title="Delete template"
+                              title="Delete scheme"
                               style={{ cursor: "pointer" }}
                               onClick={() => deleteScheme(scheme)}
                             />
