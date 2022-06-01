@@ -44,57 +44,68 @@ function UploadTemplate({ user }) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    setloading(true);
+    if (
+      name !== "" &&
+      visibility !== "" &&
+      !(file == null || file === undefined || file === "")
+    ) {
+      setloading(true);
 
-    const data = new FormData();
-    data.append("template", file);
+      const data = new FormData();
+      data.append("template", file);
 
-    let document = "";
-    let fileId = "";
+      let document = "";
+      let fileId = "";
 
-    await fetch(`https://rpms-backend.herokuapp.com/templates/files/upload/`, {
-      method: "POST",
-      headers: {
-        "x-access-token": sessionStorage.getItem("token"),
-        Accept: "application/json",
-      },
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        document = response.document;
-        fileId = response.fileId;
+      await fetch(
+        `https://rpms-backend.herokuapp.com/templates/files/upload/`,
+        {
+          method: "POST",
+          headers: {
+            "x-access-token": sessionStorage.getItem("token"),
+            Accept: "application/json",
+          },
+          body: data,
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          document = response.document;
+          fileId = response.fileId;
+        })
+        .catch((err) => {
+          alert("Error!");
+        });
+
+      const templateData = {
+        name,
+        description,
+        document,
+        fileId,
+        visibility,
+      };
+
+      fetch(`https://rpms-backend.herokuapp.com/templates/${user.email}`, {
+        method: "POST",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(templateData),
       })
-      .catch((err) => {
-        alert("Error!");
-      });
-
-    const templateData = {
-      name,
-      description,
-      document,
-      fileId,
-      visibility,
-    };
-
-    fetch(`https://rpms-backend.herokuapp.com/templates/${user.email}`, {
-      method: "POST",
-      headers: {
-        "x-access-token": sessionStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(templateData),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setloading(false);
-        alert("Added successfully!");
-      })
-      .catch((err) => {
-        setloading(false);
-        alert("Error!");
-      });
+        .then((response) => response.json())
+        .then((response) => {
+          setloading(false);
+          alert("Added successfully!");
+        })
+        .catch((err) => {
+          setloading(false);
+          alert("Error!");
+        });
+    } else {
+      alert("Please give all the required details");
+    }
   };
 
   useEffect(() => {
@@ -120,7 +131,7 @@ function UploadTemplate({ user }) {
           <Row>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Name*</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Name"
@@ -144,7 +155,7 @@ function UploadTemplate({ user }) {
           <Row>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Upload Template</Form.Label>
+                <Form.Label>Upload Template*</Form.Label>
                 <Form.Control
                   type="file"
                   accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
@@ -155,7 +166,7 @@ function UploadTemplate({ user }) {
             </Col>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Visibility</Form.Label>
+                <Form.Label>Visibility*</Form.Label>
                 <Form.Select
                   value={visibility}
                   onChange={(e) => setvisibility(e.target.value)}

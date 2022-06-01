@@ -51,37 +51,44 @@ function CreateSubmissionType({ user }) {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setloading(true);
-    console.log(selectedTemplate);
+    if (name !== "" && selectedTemplate !== "" && visibility !== "") {
+      setloading(true);
+      console.log(selectedTemplate);
 
-    //create submission type object
-    const submissionType = {
-      name,
-      description,
-      templateId: selectedTemplate,
-      isEditable,
-      isMultipleSubmissions,
-      visibility,
-    };
+      //create submission type object
+      const submissionType = {
+        name,
+        description,
+        templateId: selectedTemplate,
+        isEditable,
+        isMultipleSubmissions,
+        visibility,
+      };
 
-    //call endpoint and save submission type in the db
-    fetch(`https://rpms-backend.herokuapp.com/submissiontypes/${user.email}`, {
-      method: "POST",
-      headers: {
-        "x-access-token": sessionStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(submissionType),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setloading(false);
-        alert("Added successfully!");
-      })
-      .catch((err) => {
-        setloading(false);
-        alert("Error!");
-      });
+      //call endpoint and save submission type in the db
+      fetch(
+        `https://rpms-backend.herokuapp.com/submissiontypes/${user.email}`,
+        {
+          method: "POST",
+          headers: {
+            "x-access-token": sessionStorage.getItem("token"),
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(submissionType),
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          setloading(false);
+          alert("Added successfully!");
+        })
+        .catch((err) => {
+          setloading(false);
+          alert("Error!");
+        });
+    } else {
+      alert("Please fill the required fields!");
+    }
   };
 
   //fecth all templates
@@ -121,7 +128,7 @@ function CreateSubmissionType({ user }) {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Name*</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Name"
@@ -145,7 +152,7 @@ function CreateSubmissionType({ user }) {
             <Row>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label>Template</Form.Label>
+                  <Form.Label>Template*</Form.Label>
                   <Form.Select
                     value={selectedTemplate}
                     onChange={(e) => selectTemplate(e.target.value)}
@@ -182,7 +189,7 @@ function CreateSubmissionType({ user }) {
               </Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Label>Visibility</Form.Label>
+                  <Form.Label>Visibility*</Form.Label>
                   <Form.Select
                     value={visibility}
                     onChange={(e) => setvisibility(e.target.value)}
