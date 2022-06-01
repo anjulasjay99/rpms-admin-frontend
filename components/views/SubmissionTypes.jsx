@@ -199,7 +199,7 @@ function SubmissionTypes() {
                         <td>
                           <IconsDiv>
                             <MdDeleteForever
-                              title="Delete template"
+                              title="Delete submission type"
                               style={{ cursor: "pointer" }}
                               onClick={() => deleteType(type)}
                             />
