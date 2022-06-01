@@ -9,6 +9,8 @@ import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import { MdDeleteForever } from "react-icons/md";
+import { IconsDiv } from "../../assets/css/IconsDiv.styeld";
 
 function SubmissionTypes() {
   const navigate = useNavigate();
@@ -67,20 +69,44 @@ function SubmissionTypes() {
       });
   };
 
+  //delete submission type
+  const deleteType = (type) => {
+    if (
+      confirm(
+        `Are you sure you want to delete the submission types '${type.name}'`
+      )
+    ) {
+      fetch(`https://rpms-backend.herokuapp.com/submissiontypes/${type._id}`, {
+        method: "DELETE",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          fetchData();
+          alert("Success!");
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
+  //fetch all submission types
+  async function fetchData() {
+    await fetch("https://rpms-backend.herokuapp.com/submissiontypes/")
+      .then((response) => response.json())
+      .then((response) => {
+        setsubmissionTypes(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
       navigate("/login");
-    }
-    async function fetchData() {
-      await fetch("https://rpms-backend.herokuapp.com/submissiontypes/")
-        .then((response) => response.json())
-        .then((response) => {
-          setsubmissionTypes(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     }
 
     fetchData();
@@ -133,6 +159,7 @@ function SubmissionTypes() {
                   <th>Date Created</th>
                   <th>Template</th>
                   <th>Visibility</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -169,6 +196,15 @@ function SubmissionTypes() {
                           </a>
                         </td>
                         <td>{type.visibility}</td>
+                        <td>
+                          <IconsDiv>
+                            <MdDeleteForever
+                              title="Delete submission type"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => deleteType(type)}
+                            />
+                          </IconsDiv>
+                        </td>
                       </tr>
                     );
                   })}

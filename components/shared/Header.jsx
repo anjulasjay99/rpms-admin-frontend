@@ -29,13 +29,73 @@ function Header({ user }) {
   } else {
     return (
       <div>
-        <Navbar bg="light" variant="light" expand="lg" fixed="top">
+        <Navbar
+          variant="light"
+          expand="lg"
+          fixed="top"
+          style={{ backgroundColor: "#e3f2fd" }}
+        >
           <Container>
             <Navbar.Brand href="#home">Admin</Navbar.Brand>
             <Navbar.Toggle aria-controls="nav" />
             <Navbar.Collapse id="nav">
               <Nav className="me-auto">
-                <Nav.Link to="/">Home</Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Home
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/submission-types"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Submission Types
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/templates"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Templates
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/marking-schemes"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Marking Schemes
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/assign-panels"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Panels
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/users"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Users
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to="/roles"
+                    style={{ textDecoration: "none", color: "grey" }}
+                  >
+                    Roles
+                  </Link>
+                </Nav.Link>
               </Nav>
               <Nav className="ml-auto">
                 <NavDropdown

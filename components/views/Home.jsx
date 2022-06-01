@@ -18,6 +18,8 @@ import BreadCrumb from "../shared/BreadCrumb";
 import { NavCard } from "../../assets/css/NavCard.styled";
 import { ParentDiv } from "../../assets/css/ParentDiv.styled";
 import Pagination from "react-bootstrap/Pagination";
+import Button from "react-bootstrap/Button";
+import { MdDeleteForever } from "react-icons/md";
 
 function Home() {
   const navigate = useNavigate();
@@ -78,12 +80,32 @@ function Home() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setlognActivities(res);
+        setlognActivities([...res].reverse());
         createPagination(res);
       })
       .catch((err) => {
         alert(err);
       });
+  };
+
+  //delete all login records
+  const deleteAllLoginRecords = () => {
+    if (confirm("Are you sure you want to delete all the login records?")) {
+      fetch("https://rpms-backend.herokuapp.com/loginactivities", {
+        method: "DELETE",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          alert("Success");
+          fecthLoginActivities();
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   };
 
   useEffect(() => {
@@ -203,75 +225,92 @@ function Home() {
         <br />
         <br />
         <Row>
-          <Col xs={12}>
-            <h5>Log In Activity</h5>
-          </Col>
-          <Col xs={12}>
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Date & Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {lognActivities
-                  .reverse()
-                  .slice(currentPage.firstIndex, currentPage.lastIndex + 1)
-                  .map((data, index) => {
+          <Row>
+            <Col xs={6}>
+              <h5>Log In Activity</h5>
+            </Col>
+            <Col xs={6}>
+              <MdDeleteForever
+                style={{
+                  float: "right",
+                  cursor: "pointer",
+                  color: "red",
+                  marginRight: "10px",
+                  transform: "scale(1.2)",
+                }}
+                title="Delete all records"
+                onClick={() => deleteAllLoginRecords()}
+              />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={12}>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date & Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lognActivities
+                    .slice(currentPage.firstIndex, currentPage.lastIndex + 1)
+                    .map((data, index) => {
+                      return (
+                        <tr>
+                          <td>{currentPage.firstIndex + index + 1}</td>
+                          <td>{data.name}</td>
+                          <td>{data.email}</td>
+                          <td>{new Date(data.dateAndTime).toLocaleString()}</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Container
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Pagination>
+                  <Pagination.First onClick={() => setPage(0)} />
+                  <Pagination.Prev
+                    onClick={() => {
+                      if (currentPage.pageIndex > 0) {
+                        setPage(currentPage.pageIndex - 1);
+                      }
+                    }}
+                  />
+                  {pagination.map((p, index) => {
                     return (
-                      <tr>
-                        <td>{currentPage.firstIndex + index + 1}</td>
-                        <td>{data.name}</td>
-                        <td>{data.email}</td>
-                        <td>{new Date(data.dateAndTime).toLocaleString()}</td>
-                      </tr>
+                      <Pagination.Item onClick={() => setPage(index)}>
+                        {index + 1}
+                      </Pagination.Item>
                     );
                   })}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Container
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <Pagination>
-                <Pagination.First onClick={() => setPage(0)} />
-                <Pagination.Prev
-                  onClick={() => {
-                    if (currentPage.pageIndex > 0) {
-                      setPage(currentPage.pageIndex - 1);
-                    }
-                  }}
-                />
-                {pagination.map((p, index) => {
-                  return (
-                    <Pagination.Item onClick={() => setPage(index)}>
-                      {index + 1}
-                    </Pagination.Item>
-                  );
-                })}
-                <Pagination.Next
-                  onClick={() => {
-                    if (currentPage.pageIndex < pagination.length - 1) {
-                      setPage(currentPage.pageIndex + 1);
-                    }
-                  }}
-                />
-                <Pagination.Last
-                  onClick={() => setPage(pagination.length - 1)}
-                />
-              </Pagination>
-            </Container>
-          </Col>
+                  <Pagination.Next
+                    onClick={() => {
+                      if (currentPage.pageIndex < pagination.length - 1) {
+                        setPage(currentPage.pageIndex + 1);
+                      }
+                    }}
+                  />
+                  <Pagination.Last
+                    onClick={() => setPage(pagination.length - 1)}
+                  />
+                </Pagination>
+              </Container>
+            </Col>
+          </Row>
         </Row>
       </Container>
       <br />

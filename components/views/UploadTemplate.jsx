@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import Spinner from "react-bootstrap/Spinner";
 
 function UploadTemplate({ user }) {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function UploadTemplate({ user }) {
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [visibility, setvisibility] = useState("Public");
+  const [loading, setloading] = useState(false);
 
   const links = [
     {
@@ -42,6 +44,7 @@ function UploadTemplate({ user }) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    setloading(true);
 
     const data = new FormData();
     data.append("template", file);
@@ -85,9 +88,11 @@ function UploadTemplate({ user }) {
     })
       .then((response) => response.json())
       .then((response) => {
+        setloading(false);
         alert("Added successfully!");
       })
       .catch((err) => {
+        setloading(false);
         alert("Error!");
       });
   };
@@ -169,6 +174,14 @@ function UploadTemplate({ user }) {
                 style={{ float: "right" }}
                 onClick={(event) => onSubmit(event)}
               >
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                  hidden={!loading}
+                />
                 Save
               </Button>
               <Button
