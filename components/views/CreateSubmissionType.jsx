@@ -8,6 +8,7 @@ import styles from "../../assets/css/styles.module.css";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import Spinner from "react-bootstrap/Spinner";
 
 function CreateSubmissionType({ user }) {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function CreateSubmissionType({ user }) {
     { _id: "456", name: "temp2" },
   ]);
   const [selectedTemplate, setselectedTemplate] = useState("");
+  const [loading, setloading] = useState(false);
 
   const links = [
     {
@@ -49,6 +51,7 @@ function CreateSubmissionType({ user }) {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setloading(true);
     console.log(selectedTemplate);
 
     //create submission type object
@@ -72,9 +75,11 @@ function CreateSubmissionType({ user }) {
     })
       .then((response) => response.json())
       .then((response) => {
+        setloading(false);
         alert("Added successfully!");
       })
       .catch((err) => {
+        setloading(false);
         alert("Error!");
       });
   };
@@ -196,6 +201,14 @@ function CreateSubmissionType({ user }) {
                   style={{ float: "right" }}
                   onClick={(event) => onSubmit(event)}
                 >
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    hidden={!loading}
+                  />
                   Save
                 </Button>
                 <Button
