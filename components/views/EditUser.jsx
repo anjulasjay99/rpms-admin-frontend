@@ -20,6 +20,7 @@ function EditUser() {
   const [role, setrole] = useState("");
   const [password, setpassword] = useState("");
   const [loading, setloading] = useState(false);
+  const [InitName, setInitName] = useState("");
 
   const links = [
     {
@@ -43,12 +44,22 @@ function EditUser() {
 
   const onSave = (e) => {
     e.preventDefault();
-    if (role.toLocaleLowerCase() === "admin") {
-      updateAdmin();
-    } else if (role.toLocaleLowerCase() === "student") {
-      updateStudent();
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      email !== "" &&
+      telNo !== "" &&
+      password !== ""
+    ) {
+      if (role.toLocaleLowerCase() === "admin") {
+        updateAdmin();
+      } else if (role.toLocaleLowerCase() === "student") {
+        updateStudent();
+      } else {
+        updateStaffMember();
+      }
     } else {
-      updateStaffMember();
+      alert("Please fill all the fields!");
     }
   };
 
@@ -125,24 +136,21 @@ function EditUser() {
   const updateStudent = () => {
     setloading(true);
     const user = {
-      firstName,
-      lastName,
-      sliitEmail: email,
-      staffId: location.state.user.staffId,
+      InitName,
+      IdNumber: location.state.user.IdNumber,
+      email,
       telNo: telNo,
-      field: location.state.user.field,
+      nic: location.state.user.nic,
       password: password,
+      isGrouped: location.state.user.isGrouped,
     };
-    fetch(
-      `https://rpms-backend.herokuapp.com/students/${location.state.user._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }
-    )
+    fetch(`https://rpms-backend.herokuapp.com/students/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
       .then((res) => res.json())
       .then((res) => {
         setloading(false);
@@ -171,6 +179,7 @@ function EditUser() {
       setemail(location.state.user.email);
     } else if (location.state.user.role.trim().toLowerCase() === "student") {
       setemail(location.state.user.email);
+      setInitName(location.state.user.InitName);
     } else {
       setemail(location.state.user.sliitEmail);
     }
@@ -189,10 +198,23 @@ function EditUser() {
         <br />
 
         <Form>
-          <Row>
+          <Row hidden={role.toLowerCase() !== "student"}>
+            <Col xs={12}>
+              <Form.Group className="mb-3">
+                <Form.Label>Name*</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="First Name"
+                  value={InitName}
+                  onChange={(e) => setInitName(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row hidden={role.toLowerCase() === "student"}>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>First Name</Form.Label>
+                <Form.Label>First Name*</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="First Name"
@@ -203,7 +225,7 @@ function EditUser() {
             </Col>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Last Name</Form.Label>
+                <Form.Label>Last Name*</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Last Name"
@@ -216,7 +238,7 @@ function EditUser() {
           <Row>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>Email address*</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="name@example.com"
@@ -229,7 +251,7 @@ function EditUser() {
           <Row>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Telephone No.</Form.Label>
+                <Form.Label>Telephone No.*</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Telephone No."
@@ -240,7 +262,7 @@ function EditUser() {
             </Col>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Password*</Form.Label>
                 <Form.Control
                   type="text"
                   value={password}

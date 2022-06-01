@@ -64,60 +64,69 @@ function CreateMarkingScheme({ user }) {
   //called when user submit the form
   const onSubmit = async (event) => {
     event.preventDefault();
-    setloading(true);
+    if (
+      name !== "" &&
+      visibility !== "" &&
+      criterias.length > 0 &&
+      !(file == null || file === undefined || file === "")
+    ) {
+      setloading(true);
 
-    const data = new FormData();
-    data.append("markingscheme", file);
+      const data = new FormData();
+      data.append("markingscheme", file);
 
-    let document = "";
-    let fileId = "";
+      let document = "";
+      let fileId = "";
 
-    await fetch(
-      `https://rpms-backend.herokuapp.com/markingschemes/files/upload/`,
-      {
+      await fetch(
+        `https://rpms-backend.herokuapp.com/markingschemes/files/upload/`,
+        {
+          method: "POST",
+          headers: {
+            "x-access-token": sessionStorage.getItem("token"),
+            Accept: "application/json",
+          },
+          body: data,
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          document = response.document;
+          fileId = response.fileId;
+        })
+        .catch((err) => {
+          alert("Error!");
+        });
+
+      const markingScheme = {
+        name,
+        description,
+        criterias,
+        visibility,
+        document,
+        fileId,
+      };
+
+      fetch(`https://rpms-backend.herokuapp.com/markingschemes/${user.email}`, {
         method: "POST",
         headers: {
           "x-access-token": sessionStorage.getItem("token"),
-          Accept: "application/json",
+          "Content-type": "application/json",
         },
-        body: data,
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        document = response.document;
-        fileId = response.fileId;
+        body: JSON.stringify(markingScheme),
       })
-      .catch((err) => {
-        alert("Error!");
-      });
-
-    const markingScheme = {
-      name,
-      description,
-      criterias,
-      visibility,
-      document,
-      fileId,
-    };
-
-    fetch(`https://rpms-backend.herokuapp.com/markingschemes/${user.email}`, {
-      method: "POST",
-      headers: {
-        "x-access-token": sessionStorage.getItem("token"),
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(markingScheme),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setloading(false);
-        alert("Added successfully!");
-      })
-      .catch((err) => {
-        setloading(false);
-        alert("Error!");
-      });
+        .then((response) => response.json())
+        .then((response) => {
+          setloading(false);
+          alert("Added successfully!");
+        })
+        .catch((err) => {
+          setloading(false);
+          alert("Error!");
+        });
+    } else {
+      alert("Please give all the required details!");
+    }
   };
 
   const onCriteriaValueChange = (index, event) => {
@@ -160,7 +169,7 @@ function CreateMarkingScheme({ user }) {
           <Row>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Name*</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Name"
@@ -184,7 +193,7 @@ function CreateMarkingScheme({ user }) {
           <Row>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Upload Marking Scheme</Form.Label>
+                <Form.Label>Upload Marking Scheme*</Form.Label>
                 <Form.Control
                   type="file"
                   accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
@@ -195,7 +204,7 @@ function CreateMarkingScheme({ user }) {
             </Col>
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Visibility</Form.Label>
+                <Form.Label>Visibility*</Form.Label>
                 <Form.Select
                   value={visibility}
                   onChange={(e) => setvisibility(e.target.value)}
@@ -212,7 +221,7 @@ function CreateMarkingScheme({ user }) {
               <Form.Group className="mb-3">
                 <Row>
                   <Col lg={6}>
-                    <Form.Label>Marking Criteria</Form.Label>
+                    <Form.Label>Marking Criteria*</Form.Label>
                   </Col>
                   <Col lg={6}>
                     <Button
