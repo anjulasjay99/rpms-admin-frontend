@@ -9,6 +9,8 @@ import Container from "react-bootstrap/Container";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import { MdDeleteForever } from "react-icons/md";
+import { IconsDiv } from "../../assets/css/IconsDiv.styeld";
 
 function MarkingSchemes() {
   const navigate = useNavigate();
@@ -44,20 +46,42 @@ function MarkingSchemes() {
       });
   };
 
+  //delete scheme
+  const deleteScheme = (ms) => {
+    if (
+      confirm(`Are you sure you want to delete the marking scheme '${ms.name}'`)
+    ) {
+      fetch(`https://rpms-backend.herokuapp.com/markingschemes/${ms.fileId}`, {
+        method: "DELETE",
+        headers: {
+          "x-access-token": sessionStorage.getItem("token"),
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          fetchData();
+          alert("Success!");
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
+  //fetch all marking schemes
+  async function fetchData() {
+    await fetch("https://rpms-backend.herokuapp.com/markingschemes/")
+      .then((response) => response.json())
+      .then((response) => {
+        setmarkingSchemes(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
       navigate("/login");
-    }
-    async function fetchData() {
-      await fetch("https://rpms-backend.herokuapp.com/markingschemes/")
-        .then((response) => response.json())
-        .then((response) => {
-          setmarkingSchemes(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     }
 
     fetchData();
@@ -109,6 +133,7 @@ function MarkingSchemes() {
                   <th>Date Created</th>
                   <th>Visibility</th>
                   <th>File</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -139,6 +164,15 @@ function MarkingSchemes() {
                           <a href="#" onClick={() => openFile(scheme)}>
                             {scheme.document}
                           </a>
+                        </td>
+                        <td>
+                          <IconsDiv>
+                            <MdDeleteForever
+                              title="Delete template"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => deleteScheme(scheme)}
+                            />
+                          </IconsDiv>
                         </td>
                       </tr>
                     );

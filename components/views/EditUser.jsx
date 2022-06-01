@@ -8,6 +8,7 @@ import styles from "../../assets/css/styles.module.css";
 import Container from "react-bootstrap/Container";
 import { useNavigate, useLocation } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import Spinner from "react-bootstrap/Spinner";
 
 function EditUser() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function EditUser() {
   const [telNo, settelNo] = useState(0);
   const [role, setrole] = useState("");
   const [password, setpassword] = useState("");
+  const [loading, setloading] = useState(false);
 
   const links = [
     {
@@ -52,6 +54,7 @@ function EditUser() {
 
   //update admin user
   const updateAdmin = () => {
+    setloading(true);
     const user = {
       firstName,
       lastName,
@@ -74,14 +77,19 @@ function EditUser() {
     )
       .then((res) => res.json())
       .then((res) => {
+        setloading(false);
         alert("Success!");
         navigate("/users");
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setloading(false);
+        alert(err);
+      });
   };
 
   //update staff
   const updateStaffMember = () => {
+    setloading(true);
     const user = {
       firstName,
       lastName,
@@ -103,14 +111,19 @@ function EditUser() {
     )
       .then((res) => res.json())
       .then((res) => {
+        setloading(false);
         alert("Success!");
         navigate("/users");
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setloading(false);
+        alert(err);
+      });
   };
 
   //update student
   const updateStudent = () => {
+    setloading(true);
     const user = {
       firstName,
       lastName,
@@ -132,10 +145,14 @@ function EditUser() {
     )
       .then((res) => res.json())
       .then((res) => {
+        setloading(false);
         alert("Success!");
         navigate("/users");
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setloading(false);
+        alert(err);
+      });
   };
 
   useEffect(() => {
@@ -239,6 +256,14 @@ function EditUser() {
                 style={{ float: "right" }}
                 onClick={(e) => onSave(e)}
               >
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                  hidden={!loading}
+                />
                 Save Changes
               </Button>
               <Button

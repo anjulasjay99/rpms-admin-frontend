@@ -29,7 +29,12 @@ function Header({ user }) {
   } else {
     return (
       <div>
-        <Navbar bg="light" variant="light" expand="lg" fixed="top">
+        <Navbar
+          variant="light"
+          expand="lg"
+          fixed="top"
+          style={{ backgroundColor: "#e3f2fd" }}
+        >
           <Container>
             <Navbar.Brand href="#home">Admin</Navbar.Brand>
             <Navbar.Toggle aria-controls="nav" />

@@ -9,6 +9,7 @@ import Criteria from "../../components/shared/Criteria";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../shared/BreadCrumb";
+import Spinner from "react-bootstrap/Spinner";
 
 function CreateMarkingScheme({ user }) {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function CreateMarkingScheme({ user }) {
   const [description, setdescription] = useState("");
   const [visibility, setvisibility] = useState("Public");
   const [file, setfile] = useState();
+  const [loading, setloading] = useState(false);
 
   const links = [
     {
@@ -62,6 +64,7 @@ function CreateMarkingScheme({ user }) {
   //called when user submit the form
   const onSubmit = async (event) => {
     event.preventDefault();
+    setloading(true);
 
     const data = new FormData();
     data.append("markingscheme", file);
@@ -108,9 +111,11 @@ function CreateMarkingScheme({ user }) {
     })
       .then((response) => response.json())
       .then((response) => {
+        setloading(false);
         alert("Added successfully!");
       })
       .catch((err) => {
+        setloading(false);
         alert("Error!");
       });
   };
@@ -295,6 +300,14 @@ function CreateMarkingScheme({ user }) {
                 style={{ float: "right" }}
                 onClick={(event) => onSubmit(event)}
               >
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                  hidden={!loading}
+                />
                 Save
               </Button>
               <Button
