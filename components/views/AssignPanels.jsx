@@ -59,6 +59,7 @@ function AssignPanels() {
   const [keyword2, setkeyword2] = useState("");
   const [showAll, setshowAll] = useState(false);
   const [pagination, setpagination] = useState([]);
+  const [showUnassigned, setshowUnassigned] = useState(false);
 
   const links = [
     {
@@ -90,6 +91,15 @@ function AssignPanels() {
   const handleShow = (groupID) => {
     setselectedGroup(groupID);
     setShow(true);
+  };
+
+  //set filter
+  const setFilter = (val) => {
+    if (val === "1") {
+      setshowUnassigned(false);
+    } else {
+      setshowUnassigned(true);
+    }
   };
 
   const createPagination = (arr) => {
@@ -375,6 +385,16 @@ function AssignPanels() {
               </InputGroup>
             </div>
           </Col>
+          <Col>
+            <Form.Select
+              style={{ width: "200px", float: "right" }}
+              aria-label="Default select example"
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="1">All</option>
+              <option value="2">Unassigned</option>
+            </Form.Select>
+          </Col>
         </Row>
         <Row>
           <Col>
@@ -392,6 +412,15 @@ function AssignPanels() {
               </thead>
               <tbody>
                 {studentGroups
+                  .filter((group) => {
+                    if (showUnassigned) {
+                      if (getAssignedPanel(group.groupID) === "Unassigned") {
+                        return group;
+                      }
+                    } else {
+                      return group;
+                    }
+                  })
                   .filter((group) => {
                     if (keyword1 !== "") {
                       if (
